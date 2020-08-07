@@ -1,0 +1,23 @@
+body{
+    /* background-color: lightblue; */
+    background-image: url(./bg.jpg);
+    background-repeat: no-repeat;
+    /* background-size: 100% 125%; */
+    background-size: cover;
+}
+.cardnya{
+    margin-top: 7%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card{
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 1px black;;
+}
+
+.form-signin input{
+    border-radius: 20px;
+}
+.form-signin button{
+    border-radius: 20px;
+}
