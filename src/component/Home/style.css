@@ -1,0 +1,38 @@
+.navbar-vertical{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    max-height: 100vh;
+    display: block;
+    max-width: 12.625rem;
+}
+.align-items-center {
+    -webkit-box-align: center!important;
+    align-items: center!important;
+}
+.d-flex {
+    display: -webkit-box!important;
+    display: flex!important;
+}
+.nav-line{
+    border: none;
+    /* border-radius: 50px; */
+    margin-left: -15px;
+}
+.nav-line:focus{
+    outline: none;
+}
+
+.icon-warehouse{
+margin-top: 10px;
+}
+
+.scollbar{
+    overflow: auto;
+}
+
+
+.content {
+    margin-left: 15.625rem;
+}
+
