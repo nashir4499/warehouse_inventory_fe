@@ -1,35 +1,68 @@
-import React, { useState } from 'react'
-import './login.css'
+import React, { useState, useEffect } from 'react'
 import user from './user.svg'
 import Axios from 'axios'
-import { useAuth } from '../../context/auth'
+import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import authService from '../../services/auth.service';
+import userService from '../../services/user.service';
+import checkToken from '../../services/user.service';
 
 function Login(props) {
     const [data, setData] = useState({
         email: '',
         password: ''
     });
-    // const { setAuthTokens } = useAuth();
-    const { setAuthTokens } = useAuth();
-
-    // const [loading, setLoading] = useState(false)
 
     const login = (e) => {
         e.preventDefault()
+        authService.login(data.email, data.password)
+            .then(() => {
+                if (userService.checkToken === true) {
+                    return <Redirect to="dashboard" />
+                } else {
+                    return <Redirect to="login" />
+                }
+                // props.history.push("/dashboard")
+                // window.location.reload();
+            }).catch(err => {
+                console.log(err)
+                // setLoading(false)
+            })
         // setLoading(true)
-        Axios.post('http://127.0.0.1:3333/api/api/login', {
-            email: data.email,
-            password: data.password
-        }).then(res => {
+        // Axios.post('http://127.0.0.1:3333/api/api/login', {
+        //     email: data.email,
+        //     password: data.password
+        // }).then(res => {
 
-            console.log(res.data)
-            setAuthTokens(res.data);
-            props.history.push('../Menu')
-        }).catch(err => {
-            console.log(err)
-            // setLoading(false)
-        })
+        //     console.log(res.data)
+
+        //     localStorage.setItem('token', res.data.token)
+        //     props.history.push('/dashboard')
+        // }).catch(err => {
+        //     console.log(err)
+        //     // setLoading(false)
+        // })
     }
+
+    if (localStorage.getItem('user')) {
+        // checkToken().then(res => {
+        //     console.log(res.data)
+        //     if (res.data === true) {
+        //         return <Redirect to="dashboard" />
+        //     } else {
+        //         return <Redirect to="login" />
+        //     }
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+        return <Redirect to="dashboard" />
+    }
+    // console.log(userService.checkToken)
+    // if (userService.checkToken === true) {
+    //     return <Redirect to="dashboard" />
+    // } else {
+    //     return <Redirect to="login" />
+    // }
 
     const handleChange = (nama, value) => {
         setData({
@@ -40,8 +73,10 @@ function Login(props) {
 
     return (
         <div className="container">
+            <Helmet> {/* yang nge errorin */}
+                <title>Login</title>
+            </Helmet>
             <div className="row cardnya">
-                <a href="../Home/Home" >assad</a>
                 <div className="col-md-6 offset-md-3">
                     <div className="card">
                         <div className="card-body">
