@@ -1,10 +1,9 @@
-/* body{
+.background{
     background-image: url(./bg.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
-} */
+    background-size: 100%;
+}
 .cardnya{
-    background-color: thistle;
     margin-top: 7%;
     font-family: 'Times New Roman', Times, serif;
 }

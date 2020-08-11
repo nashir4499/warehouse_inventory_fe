@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import userService from '../../services/user.service'
 import checkToken from '../../services/user.service'
@@ -8,44 +8,44 @@ import NavbarUp from './NavbarUp'
 
 function FullLayout(props) {
 
-    // useEffect(() => {
-    //     checkUser();
-    // }, [])
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        checkUser();
+    }, [])
 
-    // const authHeader = () => {
-
-    //     const user = JSON.parse(localStorage.getItem('user'));
-
-    //     if (user && user.token) {
-    //         return { Authorization: 'Bearer ' + user.token };
-    //     } else {
-    //         return {};
-    //     }
+    // if (!localStorage.getItem('user')) {
+    //     return <Redirect to="login" />
     // }
+    const checkUser = () => {
+        setLoading(true)
+        checkToken().then((res) => {
+            console.log(res.data)
+            if (res.data === true) {
+                props.history.push("/dashboard")
 
-    if (!localStorage.getItem('user')) {
-        // checkToken().then(res => {
-        //     console.log(res.data)
-        //     if (res.data) {
-        //         return <Redirect to="dashboard" />
-        //     } else {
-        //         return <Redirect to="login" />
-        //     }
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-        return <Redirect to="login" />
+                setLoading(false)
+            }
+        }).catch(err => {
+            console.log(err)
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                props.history.push("/login")
+                setLoading(false)
+            }
+        })
     }
-    // const checkUser = () => {
-    //     if (!localStorage.getItem('user')) {
-    //         if (userService.checkToken === true) {
-    //             return <Redirect to="login" />
-    //         }
-    //     }
-    // }
 
     return (
         <div className="container">
+
+            {/* {loading ?
+                <tr>
+                    <td td colSpan="3" > Loading....</td>
+                </tr >
+                :
+                // props.children
+            } */}
+
             <Navbar />
             <div className="content">
                 <NavbarUp />

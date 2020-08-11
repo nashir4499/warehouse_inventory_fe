@@ -9,19 +9,23 @@ const login = (email, password) => {
             password,
         }).then((res) => {
             if (res.data.token) {
-                localStorage.setItem("user", JSON.stringify(res.data))
+                // localStorage.setItem("user", JSON.stringify(res.data))
+                localStorage.setItem('token', res.data.token)
             }
-
             return res.data;
         })
+    // .catch(err => { //asalnya juga gak ada
+    //     alert("email atau password")
+    //     console.log(err)
+    // })
 }
 
 const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 }
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"))
+    return JSON.parse(localStorage.getItem("token"))
 }
 
 export default {

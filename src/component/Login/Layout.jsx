@@ -3,7 +3,7 @@ import './login.css'
 
 function Layout(props) {
     return (
-        <div className="text-center">
+        <div className="text-center background">
             {props.children}
         </div>
     )

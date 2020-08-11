@@ -9,7 +9,7 @@ import checkToken from '../../services/user.service'
 function Dashboard(props) {
 
     const logout = () => {
-        localStorage.removeItem('user')
+        localStorage.removeItem('token')
         props.history.push('/login')
     }
 
@@ -39,6 +39,7 @@ function Dashboard(props) {
             })
     }
 
+
     return (
         <div>
             <Helmet>
@@ -50,6 +51,8 @@ function Dashboard(props) {
             <button onClick={logout}>Logout</button>
         </div>
     )
+
+
 }
 
 export default Dashboard

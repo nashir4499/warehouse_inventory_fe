@@ -5,7 +5,13 @@ const API_URL = "http://127.0.0.1:3333/api/api/";
 
 
 const checkToken = () => {
-    return Axios.get(API_URL + "check", { headers: authHeader() });
+    return Axios.get(API_URL + "check", { headers: authHeader() })
+    // .then((res) => {
+    //     return res.data;
+    // }).catch(err => {
+    //     console.log(err)
+    //     // setLoading(false)
+    // })
 }
 
 export default checkToken

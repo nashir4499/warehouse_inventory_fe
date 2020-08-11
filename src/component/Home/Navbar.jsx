@@ -7,16 +7,16 @@ function Navbar() {
         <nav className="navbar-vertical navbar navbar-light navbar-glass navbar-expand-x1">
             <div className="d-flex align-items-center">
                 <button className="navbar-toggler nav-line" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    {/* <button type="button" id="toggleNavigationTooltip" class="navbar-toggler-humburger-icon navbar-vertical-toggle btn btn-link"> */}
+                    {/* <button type="button" id="toggleNavigationTooltip" className="navbar-toggler-humburger-icon navbar-vertical-toggle btn btn-link"> */}
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <p className="navbar-brand text-decoration-none text-left icon-warehouse" to="/">
+                <span className="navbar-brand text-decoration-none text-left icon-warehouse" to="/">
                     <div className="d-flex align-items-center py-3">
                         <img className="mr-2" src={warehouse} alt="logo" width="40" />
                         <span className="text-sans-serif">warehouse</span>
                     </div>
-                </p>
+                </span>
             </div>
             <div className="scrollbar navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav flex-column">

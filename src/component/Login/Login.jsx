@@ -4,7 +4,6 @@ import Axios from 'axios'
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import authService from '../../services/auth.service';
-import userService from '../../services/user.service';
 import checkToken from '../../services/user.service';
 
 function Login(props) {
@@ -13,19 +12,34 @@ function Login(props) {
         password: ''
     });
 
+    const checkUser = () => {
+        checkToken().then((res) => {
+            console.log(res.data)
+            if (res.data === true) {
+                props.history.push("/dashboard")
+            }
+        })
+    }
+
     const login = (e) => {
         e.preventDefault()
         authService.login(data.email, data.password)
             .then(() => {
-                if (userService.checkToken === true) {
-                    return <Redirect to="dashboard" />
-                } else {
-                    return <Redirect to="login" />
-                }
+                // if (checkToken() === true) {
+                //     console.log(checkToken())
+                //     props.history.push("/dashboard")
+                //     // return <Redirect to="/dashboard" />
+                // } else {
+                //     console.log(checkToken())
+                //     props.history.push("/login")
+                //     // return <Redirect to="/login" />
+                // }
                 // props.history.push("/dashboard")
                 // window.location.reload();
+                checkUser()
             }).catch(err => {
-                console.log(err)
+                alert("user yang anda masukan tidak ada")
+                // console.log(err)
                 // setLoading(false)
             })
         // setLoading(true)
@@ -44,24 +58,24 @@ function Login(props) {
         // })
     }
 
-    if (localStorage.getItem('user')) {
-        // checkToken().then(res => {
-        //     console.log(res.data)
-        //     if (res.data === true) {
-        //         return <Redirect to="dashboard" />
-        //     } else {
-        //         return <Redirect to="login" />
-        //     }
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-        return <Redirect to="dashboard" />
-    }
+    // if (localStorage.getItem('user')) {
+    //     // checkToken().then(res => {
+    //     //     console.log(res.data)
+    //     //     if (res.data === true) {
+    //     //         return <Redirect to="/dashboard" />
+    //     //     } else {
+    //     //         return <Redirect to="/login" />
+    //     //     }
+    //     // }).catch(err => {
+    //     //     console.log(err)
+    //     // })
+    //     return <Redirect to="/dashboard" />
+    // }
     // console.log(userService.checkToken)
     // if (userService.checkToken === true) {
-    //     return <Redirect to="dashboard" />
+    //     return <Redirect to="/dashboard" />
     // } else {
-    //     return <Redirect to="login" />
+    //     return <Redirect to="/login" />
     // }
 
     const handleChange = (nama, value) => {
