@@ -33,9 +33,9 @@ function UbahRak(props) {
         })
     }
 
-    const savePinjam = (e) => {
+    const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`, {
+        Axios.post(`http://192.168.100.173:3333/rak/${props.match.params.id}`, {
             id: data.id,
             nama: data.nama,
             stock_max: data.stock_max
@@ -47,17 +47,17 @@ function UbahRak(props) {
     }
     return (
         <div className="container-fluid mt-3 api">
-            <h4>Ubah Barang Masuk</h4>
-            <Link to="/barangmasuk" className="btn btn-warning mb-3">Kembali</Link>
+            <h4>Ubah Rak</h4>
+            <Link to="/rak" className="btn btn-warning mb-3">Kembali</Link>
             <br />
 
-            <form onSubmit={savePinjam}>
+            <form onSubmit={savePerubahan}>
                 <div className="form-group">
                     <label htmlFor="rilis">ID</label>
                     <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <label>Stock Barang Masuk</label>
+                    <label>Nama Rak</label>
                     <input type="text" className="form-control" value={data.nama} onChange={(e) => handleChange('nama', e.target.value)} />
                 </div>
                 <div className="form-group">

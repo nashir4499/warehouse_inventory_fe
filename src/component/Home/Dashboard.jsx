@@ -16,6 +16,7 @@ function Dashboard(props) {
     // const [barangMasuks, setBarangMasuks] = useState([]);
     const [barangs, setBarangs] = useState([]);
     const [raks, setRaks] = useState([]);
+    const [rakTerpakais, setRakTerpakais] = useState([]);
     const [barangMasuk, setBarangMasuk] = useState([]);
     const [barangKeluar, setBarangKeluar] = useState([]);
     const [suplier, setSuplier] = useState([]);
@@ -35,19 +36,9 @@ function Dashboard(props) {
     });
 
     useEffect(() => {
-        currentUser()
         checkItem()
     }, [])
 
-    const currentUser = () => {
-        Axios.get("http://192.168.100.173:3333/api/api/profile", { headers: authHeader() })
-            .then(res => {
-                // console.log(res.data)
-                setUser(res.data);
-            }).catch(err => {
-                console.log(err)
-            })
-    }
 
     const checkItem = () => {
         Axios.get("http://192.168.100.173:3333/bmasuk/jumlah")
@@ -65,6 +56,12 @@ function Dashboard(props) {
         Axios.get("http://192.168.100.173:3333/bkeluar/jumlah")
             .then((res) => {
                 setBarangKeluar(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        Axios.get("http://192.168.100.173:3333/rakterpakai/jumlah")
+            .then((res) => {
+                setRakTerpakais(res.data)
             }).catch(err => {
                 console.log(err)
             })
@@ -88,7 +85,7 @@ function Dashboard(props) {
             })
     }
 
-    const rakTersedia = 64 - barangMasuk;
+    const rakTersedia = 64 - rakTerpakais;
 
     const [pasangRak, setPasangRak] = useState([]);
     const [pasangBarang, setPasangBarang] = useState(['']);
@@ -240,9 +237,6 @@ function Dashboard(props) {
                 <title>Dashboard</title>
             </Helmet>
             <div className="row mb-2">
-                Hollo User
-                <div>{user.username}</div>
-                <div>{user.email}</div>
                 <button onClick={logout}>Logout</button>
             </div>
 
@@ -255,7 +249,7 @@ function Dashboard(props) {
                             <h6>Barang Masuk</h6>
                             <div className="row text-right mInfo">
                                 <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
+                                    <Link className="card-link" to="/barangmasuk">More Info</Link>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +262,7 @@ function Dashboard(props) {
                             <h6>Barang Keluar</h6>
                             <div className="row text-right mInfo">
                                 <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
+                                    <Link className="card-link" to="/barangkeluar">More Info</Link>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +275,7 @@ function Dashboard(props) {
                             <h6>Rak Tersedia</h6>
                             <div className="row text-right mInfo">
                                 <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
+                                    <Link className="card-link" to="/isirak">More Info</Link>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +292,7 @@ function Dashboard(props) {
                             <h6>Jumlah Suplier</h6>
                             <div className="row text-right mInfo">
                                 <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
+                                    <Link className="card-link" to="/suplier">More Info</Link>
                                 </div>
                             </div>
                         </div>
@@ -308,28 +302,20 @@ function Dashboard(props) {
                     <div className="card card-dashboard">
                         {/* rakTersedia >= 32 ? 'rgba(255, 176, 176)' : 'rgba(255, 176, 176)' */}
                         <div className="card-body" style={{ background: rakTersedia >= 32 ? 'rgba(255, 176, 176)' : 'rgba(183, 255, 173)', borderRadius: '10px' }}>
+                            <h6>Stok barang dalam rak</h6>
+                            <br />
                             <h4><b>{rakTersedia >= 32 ? 'Dibawah Standar' : 'Diatas Standa'}</b></h4>
-                            <h6>Stok Dalam Rak</h6>
-                            <div className="row text-right mInfo mt-4">
-                                <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div className=" mb-3 col-md-4">
-                    <div className="card card-dashboard">
-                        <div className="card-body">
-                            {/* <h1>Go</h1> */}
-                            <h3>Laporan</h3>
-                            <div className="row text-right mInfo mt-5">
-                                <div className="col">
-                                    {/* <Link className="card-link">More Info</Link> */}
-                                </div>
+                    <Link className="card-link" to="/laporan">
+                        <div className="card card-dashboard">
+                            <div className="card-body text-center body-laporan">
+                                <h2><b>Laporan</b></h2>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
 

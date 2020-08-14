@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Axios from 'axios'
+import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
-function UbahBarangMasuk(props) {
+function TambahBarangKeluar(props) {
     const [data, setData] = useState({
         id: '',
-        stock_bm: '',
+        stock_bk: '',
         deskripsi: '',
-        barang_id: []
+        barang_id: ''
     })
-
     useEffect(() => {
         checkItem()
     }, [])
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`)
-            .then(res => {
-                setData({
-                    id: res.data.id,
-                    stock_bm: res.data.stock_bm,
-                    deskripsi: res.data.deskripsi,
-                    barang_id: res.data.barang_id
-                })
-            }).catch(err => {
-                console.log(err)
-            })
         Axios.get("http://192.168.100.173:3333/barang")
             .then((res) => {
                 setBarangs(res.data)
@@ -42,16 +32,17 @@ function UbahBarangMasuk(props) {
         })
     }
 
-    const savePerubahan = (e) => {
+    const simpanData = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
-            Axios.post(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`, {
+            Axios.post('http://192.168.100.173:3333/bkeluar', {
                 id: data.id,
-                stock_bm: data.stock_bm,
+                stock_bk: data.stock_bk,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,
             }).then(res => {
-                props.history.push('/barangmasuk')
+                console.log(res)
+                props.history.push('/barangkeluar')
             }).catch(err => {
                 console.log(err)
             })
@@ -59,20 +50,21 @@ function UbahBarangMasuk(props) {
             alert("Stok Kosong")
         }
     }
+
     return (
         <div className="container-fluid mt-3 api">
-            <h4>Ubah Barang Masuk</h4>
-            <Link to="/barangmasuk" className="btn btn-warning mb-3">Kembali</Link>
+            <h4>Tambah Barang Keluar</h4>
+            <Link to="/barangkeluar" className="btn btn-warning mb-3">Kembali</Link>
             <br />
 
-            <form onSubmit={savePerubahan}>
+            <form onSubmit={simpanData}>
                 <div className="form-group">
                     <label htmlFor="rilis">ID</label>
                     <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <label>Stock Barang Masuk</label>
-                    <input type="text" className="form-control" value={data.stock_bm} onChange={(e) => handleChange('stock_bm', e.target.value)} />
+                    <label>Stock Barang Keluar</label>
+                    <input type="text" className="form-control" value={data.stock_bk} onChange={(e) => handleChange('stock_bk', e.target.value)} />
                 </div>
                 <div className="form-group">
                     <label>Deskripsi</label>
@@ -81,7 +73,7 @@ function UbahBarangMasuk(props) {
                 <fieldset id="group1">
                     <div className="form-group">
                         <label>Pilih Barang</label>
-                        <select className="custom-select" id="barangs" name="barangs" value={data.barang_id} onChange={(e) => handleChange('barang_id', e.target.value)} >
+                        <select className="custom-select" id="barangs" name="barangs" onChange={(e) => handleChange('barang_id', e.target.value)} >
                             <option defaultValue>Choose...</option>
                             {
                                 barangs && barangs.map(barang => {
@@ -100,4 +92,4 @@ function UbahBarangMasuk(props) {
     )
 }
 
-export default UbahBarangMasuk
+export default TambahBarangKeluar

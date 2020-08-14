@@ -31,7 +31,7 @@ function TambahBarangMasuk(props) {
         })
     }
 
-    const savePinjam = (e) => {
+    const simpanData = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
             Axios.post('http://192.168.100.173:3333/bmasuk', {
@@ -56,7 +56,7 @@ function TambahBarangMasuk(props) {
             <Link to="/barangmasuk" className="btn btn-warning mb-3">Kembali</Link>
             <br />
 
-            <form onSubmit={savePinjam}>
+            <form onSubmit={simpanData}>
                 <div className="form-group">
                     <label htmlFor="rilis">ID</label>
                     <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />

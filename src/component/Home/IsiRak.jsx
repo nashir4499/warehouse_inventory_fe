@@ -108,8 +108,8 @@ function IsiRak() {
     return (
         <div className="container mt-4">
             <div className="row">
-                <div className="col-md-6">
-                    <h2>Barang Masuk</h2>
+                <div className="col-md">
+                    <h2>Data barang yang ada di rak</h2>
                     {/* <Link className="btn btn-primary mb-4" to="/barangmasuk/tambah">Tambah Barang Masuk</Link> */}
                 </div>
             </div>

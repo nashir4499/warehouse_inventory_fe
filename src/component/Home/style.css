@@ -43,6 +43,19 @@ margin-top: 10px;
     box-shadow: 3px 3px 3px #aaaaaa;
 }
 
+.body-laporan{
+    color: white;
+    background-color: teal;
+    border-radius: 10px;
+}
+
+.body-laporan h2{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
 .mInfo{
     /* position: absolute; */
     background-color: rgba(170, 170, 170, 0.1);
@@ -50,4 +63,27 @@ margin-top: 10px;
     margin-bottom: -5%;
     padding: 10px;
 }
+
+.isi {
+	margin-top: 60px;
+
+	padding: 20px;
+}
+
+.profil-user img {
+    width: 100%;
+    height: 100%;
+}
+.col-profil {
+	width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;
+    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+    box-shadow: 3px 3px 3px #aaaaaa;
+    padding: 25px;
+}
+
+
 
