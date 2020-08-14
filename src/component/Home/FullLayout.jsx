@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
-import userService from '../../services/user.service'
 import checkToken from '../../services/user.service'
 import Navbar from './Navbar'
 import './style.css'
 import NavbarUp from './NavbarUp'
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 function FullLayout(props) {
 
@@ -19,33 +19,32 @@ function FullLayout(props) {
     const checkUser = () => {
         setLoading(true)
         checkToken().then((res) => {
-            console.log(res.data)
             if (res.data === true) {
-                props.history.push("/dashboard")
-
                 setLoading(false)
             }
         }).catch(err => {
-            console.log(err)
+            // console.log(err)
             if (err.response.status === 401) {
                 localStorage.removeItem('token')
                 props.history.push("/login")
-                setLoading(false)
+                // setLoading(false)
             }
         })
     }
 
+    if (loading === true) {
+        return (
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col text-center">
+                        <Loader />
+                    </div>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="container">
-
-            {/* {loading ?
-                <tr>
-                    <td td colSpan="3" > Loading....</td>
-                </tr >
-                :
-                // props.children
-            } */}
-
             <Navbar />
             <div className="content">
                 <NavbarUp />

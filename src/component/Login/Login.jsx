@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import user from './user.svg'
-import Axios from 'axios'
-import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import authService from '../../services/auth.service';
 import checkToken from '../../services/user.service';
+import { Redirect } from 'react-router-dom';
 
 function Login(props) {
     const [data, setData] = useState({
@@ -14,11 +13,14 @@ function Login(props) {
 
     const checkUser = () => {
         checkToken().then((res) => {
-            console.log(res.data)
             if (res.data === true) {
                 props.history.push("/dashboard")
             }
         })
+    }
+
+    if (localStorage.getItem('token')) {
+        return <Redirect to="/dashboard" />
     }
 
     const login = (e) => {
@@ -43,7 +45,7 @@ function Login(props) {
                 // setLoading(false)
             })
         // setLoading(true)
-        // Axios.post('http://127.0.0.1:3333/api/api/login', {
+        // Axios.post('http://192.168.100.173:3333/api/api/login', {
         //     email: data.email,
         //     password: data.password
         // }).then(res => {
@@ -58,19 +60,6 @@ function Login(props) {
         // })
     }
 
-    // if (localStorage.getItem('user')) {
-    //     // checkToken().then(res => {
-    //     //     console.log(res.data)
-    //     //     if (res.data === true) {
-    //     //         return <Redirect to="/dashboard" />
-    //     //     } else {
-    //     //         return <Redirect to="/login" />
-    //     //     }
-    //     // }).catch(err => {
-    //     //     console.log(err)
-    //     // })
-    //     return <Redirect to="/dashboard" />
-    // }
     // console.log(userService.checkToken)
     // if (userService.checkToken === true) {
     //     return <Redirect to="/dashboard" />
@@ -92,7 +81,7 @@ function Login(props) {
             </Helmet>
             <div className="row cardnya">
                 <div className="col-md-6 offset-md-3">
-                    <div className="card">
+                    <div className="card cardlogin">
                         <div className="card-body">
                             <h1 className="text-center login-title">Please Login</h1>
                             <div className="account-wall">

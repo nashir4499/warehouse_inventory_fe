@@ -39,17 +39,10 @@ function NavbarUp() {
                     </a>
                 </li>
                 <li className="dropdown nav-item">
-                    <a aria-haspopup="true" href="#" className="px-0 notification-indicator notification-indicator-primary nav-link" aria-expanded="false">
-                    </a>
                     <div tabIndex="-1" role="menu" aria-hidden="true" className="dropdown-menu-card dropdown-menu dropdown-menu-right">
                     </div>
                 </li>
                 <li className="dropdown nav-item">
-                    <a aria-haspopup="true" href="#" className="pr-0 nav-link" aria-expanded="false">
-                        <div className="avatar avatar-xl ">
-                            <img className="rounded-circle " src="/static/media/3.cb95ae1b.jpg" alt="" />
-                        </div>
-                    </a>
                     <div tabIndex="-1" role="menu" aria-hidden="true" className="dropdown-menu-card dropdown-menu dropdown-menu-right">
                         <div className="bg-white rounded-soft py-2">
                             <a href="#!" tabIndex="0" role="menuitem" className="font-weight-bold text-warning dropdown-item">

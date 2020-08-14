@@ -1,3 +1,6 @@
+body{
+    background-color: #eef7f7;
+}
 .background{
     background-image: url(./bg.jpg);
     background-repeat: no-repeat;
@@ -8,7 +11,7 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-.card{
+.cardlogin{
     border-radius: 20px;
     box-shadow: 5px 5px 5px 1px black;;
 }
