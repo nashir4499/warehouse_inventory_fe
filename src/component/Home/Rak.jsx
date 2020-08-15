@@ -10,7 +10,7 @@ function Rak() {
     const [raks, setRaks] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/rak")
+        Axios.get("http://127.0.0.1:3333/rak")
             .then((res) => {
                 setRaks(res.data)
             }).catch(err => {
@@ -20,7 +20,7 @@ function Rak() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://192.168.100.173:3333/rak/${id}`) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://127.0.0.1:3333/rak/${id}`) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {

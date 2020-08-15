@@ -12,7 +12,7 @@ function Suplier() {
     const [supliers, setSupliers] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/suplier")
+        Axios.get("http://127.0.0.1:3333/suplier")
             .then((res) => {
                 setSupliers(res.data)
             }).catch(err => {
@@ -22,7 +22,7 @@ function Suplier() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://192.168.100.173:3333/suplier/${id}`) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://127.0.0.1:3333/suplier/${id}`) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {

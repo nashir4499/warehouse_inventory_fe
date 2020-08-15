@@ -20,7 +20,7 @@ function TambahSuplier(props) {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://192.168.100.173:3333/suplier', {
+        Axios.post('http://127.0.0.1:3333/suplier', {
             id: data.id,
             alamat: data.alamat,
             phone: data.phone,

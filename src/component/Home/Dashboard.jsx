@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import Axios from 'axios'
-import authHeader from '../../services/auth-header'
 import { Redirect, Link } from 'react-router-dom'
 
 
@@ -12,7 +11,6 @@ function Dashboard(props) {
         props.history.push('/login')
     }
 
-    const [user, setUser] = useState([]);
     // const [barangMasuks, setBarangMasuks] = useState([]);
     const [barangs, setBarangs] = useState([]);
     const [raks, setRaks] = useState([]);
@@ -41,43 +39,43 @@ function Dashboard(props) {
 
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/bmasuk/jumlah")
+        Axios.get("http://127.0.0.1:3333/bmasuk/jumlah")
             .then((res) => {
                 setBarangMasuk(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/suplier/jumlah")
+        Axios.get("http://127.0.0.1:3333/suplier/jumlah")
             .then((res) => {
                 setSuplier(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/bkeluar/jumlah")
+        Axios.get("http://127.0.0.1:3333/bkeluar/jumlah")
             .then((res) => {
                 setBarangKeluar(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/rakterpakai/jumlah")
+        Axios.get("http://127.0.0.1:3333/rakterpakai/jumlah")
             .then((res) => {
                 setRakTerpakais(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        // Axios.get("http://192.168.100.173:3333/bmasuk")
+        // Axios.get("http://127.0.0.1:3333/bmasuk")
         //     .then((res) => {
         //         setBarangMasuks(res.data)
         //     }).catch(err => {
         //         console.log(err)
         //     })
-        Axios.get("http://192.168.100.173:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang")
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/rak")
+        Axios.get("http://127.0.0.1:3333/rak")
             .then((res) => {
                 setRaks(res.data)
             }).catch(err => {
@@ -103,14 +101,14 @@ function Dashboard(props) {
     //     anggota_id: ''
     // })
     // if (pasangBarang > "0" && pasangRak > "0") {
-    //     // Axios.get(`http://192.168.100.173:3333/rak/${pasangRak}`)
+    //     // Axios.get(`http://127.0.0.1:3333/rak/${pasangRak}`)
     //     //     .then(res => {
     //     //         console.log(res.data)
     //     //         setPilihRak(res.data)
     //     //     }).catch(err => {
     //     //         console.log(err)
     //     //     })
-    //     // Axios.get(`http://192.168.100.173:3333/bmasuk/${pasangBarang}`)
+    //     // Axios.get(`http://127.0.0.1:3333/bmasuk/${pasangBarang}`)
     //     //     .then(res => {
     //     //         console.log(res.data)
     //     //         setPilihBM(res.data)
@@ -122,14 +120,14 @@ function Dashboard(props) {
     // }
 
     const pilihItem = () => {
-        Axios.get(`http://192.168.100.173:3333/rak/${pasangRak}`)
+        Axios.get(`http://127.0.0.1:3333/rak/${pasangRak}`)
             .then(res => {
                 console.log(res.data)
                 setPilihRak(res.data)
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get(`http://192.168.100.173:3333/barang/${pasangBarang}`)
+        Axios.get(`http://127.0.0.1:3333/barang/${pasangBarang}`)
             .then(res => {
                 console.log(res.data)
                 setPilihBarang(res.data)
@@ -147,7 +145,7 @@ function Dashboard(props) {
             if (currantStockRak < 0) {
                 const stockfix = Math.abs(currantStockRak)
                 console.log((stockfix))
-                Axios.post(`http://192.168.100.173:3333/rak/${pasangRak}`, {
+                Axios.post(`http://127.0.0.1:3333/rak/${pasangRak}`, {
                     id: pilihRak.id,
                     nama: pilihRak.nama,
                     stock_max: 0
@@ -158,7 +156,7 @@ function Dashboard(props) {
                     }).catch(err => {
                         console.log(err)
                     })
-                Axios.post(`http://192.168.100.173:3333/barang/${pasangBarang}`, {
+                Axios.post(`http://127.0.0.1:3333/barang/${pasangBarang}`, {
                     id: pilihBarang.id,
                     produk: pilihBarang.produk,
                     suplier_id: pilihBarang.suplier_id,
@@ -173,7 +171,7 @@ function Dashboard(props) {
                         console.log(err)
                     })
 
-                Axios.post('http://192.168.100.173:3333/rakterpakai', {
+                Axios.post('http://127.0.0.1:3333/rakterpakai', {
                     stock: pilihBarang.stock - stockfix,
                     rak_id: pasangRak,
                     barang_id: pasangBarang,
@@ -185,9 +183,21 @@ function Dashboard(props) {
                     .catch(err => {
                         console.log(err)
                     })
+                Axios.post('http://127.0.0.1:3333/bmasuk', {
+                    stock_bm: pilihBarang.stock - stockfix,
+                    deskripsi: "Ditambahkan",
+                    barang_id: pasangBarang,
+                })
+                    .then(res => {
+                        console.log(res.data)
+                        window.location.reload();
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
 
             } else {
-                Axios.post(`http://192.168.100.173:3333/rak/${pasangRak}`, {
+                Axios.post(`http://127.0.0.1:3333/rak/${pasangRak}`, {
                     id: pilihRak.id,
                     nama: pilihRak.nama,
                     stock_max: pilihRak.stock_max - pilihBarang.stock
@@ -198,7 +208,7 @@ function Dashboard(props) {
                     }).catch(err => {
                         console.log(err)
                     })
-                Axios.post(`http://192.168.100.173:3333/barang/${pasangBarang}`, {
+                Axios.post(`http://127.0.0.1:3333/barang/${pasangBarang}`, {
                     id: pilihBarang.id,
                     produk: pilihBarang.produk,
                     suplier_id: pilihBarang.suplier_id,
@@ -213,9 +223,21 @@ function Dashboard(props) {
                         console.log(err)
                     })
 
-                Axios.post('http://192.168.100.173:3333/rakterpakai', {
+                Axios.post('http://127.0.0.1:3333/rakterpakai', {
                     stock: pilihBarang.stock,
                     rak_id: pasangRak,
+                    barang_id: pasangBarang,
+                })
+                    .then(res => {
+                        console.log(res.data)
+                        window.location.reload();
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                Axios.post('http://127.0.0.1:3333/bmasuk', {
+                    stock_bm: pilihBarang.stock,
+                    deskripsi: "Ditambahkan",
                     barang_id: pasangBarang,
                 })
                     .then(res => {

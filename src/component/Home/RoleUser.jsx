@@ -12,7 +12,7 @@ function RoleUser() {
     const [roles, setRoles] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/role")
+        Axios.get("http://127.0.0.1:3333/role")
             .then((res) => {
                 setRoles(res.data)
             }).catch(err => {
@@ -22,7 +22,7 @@ function RoleUser() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://192.168.100.173:3333/role/${id}`) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://127.0.0.1:3333/role/${id}`) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {

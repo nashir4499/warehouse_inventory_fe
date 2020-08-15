@@ -18,7 +18,7 @@ function TambahKategori(props) {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://192.168.100.173:3333/kategori', {
+        Axios.post('http://127.0.0.1:3333/kategori', {
             id: data.id,
             nama: data.nama,
         }).then(res => {

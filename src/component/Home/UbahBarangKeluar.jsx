@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 function UbahBarangKeluar(props) {
     const [data, setData] = useState({
-        id: '',
         stock_bk: '',
         deskripsi: '',
         barang_id: []
@@ -18,10 +17,9 @@ function UbahBarangKeluar(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://192.168.100.173:3333/bkeluar/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/bkeluar/${props.match.params.id}`)
             .then(res => {
                 setData({
-                    id: res.data.id,
                     stock_bk: res.data.stock_bk,
                     deskripsi: res.data.deskripsi,
                     barang_id: res.data.barang_id
@@ -29,7 +27,7 @@ function UbahBarangKeluar(props) {
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang")
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -46,8 +44,7 @@ function UbahBarangKeluar(props) {
 
     const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://192.168.100.173:3333/bkeluar/${props.match.params.id}`, {
-            id: data.id,
+        Axios.post(`http://127.0.0.1:3333/bkeluar/${props.match.params.id}`, {
             stock_bk: data.stock_bk,
             deskripsi: data.deskripsi,
             barang_id: data.barang_id,
@@ -64,10 +61,6 @@ function UbahBarangKeluar(props) {
             <br />
 
             <form onSubmit={savePerubahan}>
-                <div className="form-group">
-                    <label htmlFor="rilis">ID</label>
-                    <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />
-                </div>
                 <div className="form-group">
                     <label>Stock Barang Keluar</label>
                     <input type="text" className="form-control" value={data.stock_bk} onChange={(e) => handleChange('stock_bk', e.target.value)} />

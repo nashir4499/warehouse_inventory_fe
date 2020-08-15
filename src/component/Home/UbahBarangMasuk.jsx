@@ -4,7 +4,6 @@ import Axios from 'axios'
 
 function UbahBarangMasuk(props) {
     const [data, setData] = useState({
-        id: '',
         stock_bm: '',
         deskripsi: '',
         barang_id: []
@@ -16,10 +15,9 @@ function UbahBarangMasuk(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`)
             .then(res => {
                 setData({
-                    id: res.data.id,
                     stock_bm: res.data.stock_bm,
                     deskripsi: res.data.deskripsi,
                     barang_id: res.data.barang_id
@@ -27,7 +25,7 @@ function UbahBarangMasuk(props) {
             }).catch(err => {
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang")
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -45,8 +43,7 @@ function UbahBarangMasuk(props) {
     const savePerubahan = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
-            Axios.post(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`, {
-                id: data.id,
+            Axios.post(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`, {
                 stock_bm: data.stock_bm,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,
@@ -66,10 +63,6 @@ function UbahBarangMasuk(props) {
             <br />
 
             <form onSubmit={savePerubahan}>
-                <div className="form-group">
-                    <label htmlFor="rilis">ID</label>
-                    <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />
-                </div>
                 <div className="form-group">
                     <label>Stock Barang Masuk</label>
                     <input type="text" className="form-control" value={data.stock_bm} onChange={(e) => handleChange('stock_bm', e.target.value)} />

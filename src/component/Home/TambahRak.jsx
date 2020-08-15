@@ -18,7 +18,7 @@ function TambahRak(props) {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://192.168.100.173:3333/rak', {
+        Axios.post('http://127.0.0.1:3333/rak', {
             id: data.id,
             nama: data.nama,
             stock_max: data.stock_max,

@@ -5,7 +5,6 @@ import Axios from 'axios';
 function TambahBarangMasuk(props) {
 
     const [data, setData] = useState({
-        id: '',
         stock_bm: '',
         deskripsi: '',
         barang_id: ''
@@ -16,7 +15,7 @@ function TambahBarangMasuk(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang")
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -34,8 +33,7 @@ function TambahBarangMasuk(props) {
     const simpanData = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
-            Axios.post('http://192.168.100.173:3333/bmasuk', {
-                id: data.id,
+            Axios.post('http://127.0.0.1:3333/bmasuk', {
                 stock_bm: data.stock_bm,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,
@@ -57,10 +55,6 @@ function TambahBarangMasuk(props) {
             <br />
 
             <form onSubmit={simpanData}>
-                <div className="form-group">
-                    <label htmlFor="rilis">ID</label>
-                    <input type="text" className="form-control" value={data.id} onChange={(e) => handleChange('id', e.target.value)} />
-                </div>
                 <div className="form-group">
                     <label>Stock Barang Masuk</label>
                     <input type="text" className="form-control" value={data.stock_bm} onChange={(e) => handleChange('stock_bm', e.target.value)} />

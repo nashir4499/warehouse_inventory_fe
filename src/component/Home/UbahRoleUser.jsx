@@ -15,7 +15,7 @@ function UbahRoleUser(props) {
     }, [])
 
     const checkItem = () => {
-        Axios.get(`http://192.168.100.173:3333/role/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/role/${props.match.params.id}`)
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -35,7 +35,7 @@ function UbahRoleUser(props) {
 
     const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://192.168.100.173:3333/role/${props.match.params.id}`, {
+        Axios.post(`http://127.0.0.1:3333/role/${props.match.params.id}`, {
             id: data.id,
             nama: data.nama
         }).then(res => {
