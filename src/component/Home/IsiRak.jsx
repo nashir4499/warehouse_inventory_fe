@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment, useMemo } from 'react'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -69,6 +69,45 @@ function IsiRak() {
     //search
     const [search, setInput] = useState('');
 
+    //sorting
+    const useSortableData = (itmeRaks, config = null) => {
+        const [sortConfig, setSortConfig] = useState(config);
+
+        const sortIRaks = useMemo(() => {
+            let sortItmeRaks = [...itmeRaks]
+            if (sortConfig !== null) {
+                sortItmeRaks.sort((a, b) => {
+                    if (a[sortConfig.key] < b[sortConfig.key]) {
+                        return sortConfig.direction === "ascending" ? -1 : 1;
+                    }
+                    if (a[sortConfig.key] > b[sortConfig.key]) {
+                        return sortConfig.direction === "ascending" ? 1 : -1;
+                    }
+                    return 0;
+                });
+            }
+            return sortItmeRaks;
+        }, [itmeRaks, sortConfig]);
+
+        const requestSort = (key) => {
+            let direction = "ascending";
+            if (sortConfig && sortConfig.key === key && sortConfig.direction === "ascending") {
+                direction = "descending";
+            }
+            setSortConfig({ key, direction });
+        };
+
+        return { itmeRaks: sortIRaks, requestSort, sortConfig };
+    }
+
+    const { itmeRaks, requestSort, sortConfig } = useSortableData(isiRaks)
+
+    const getClassNamesFor = (name) => {
+        if (!sortConfig) {
+            return;
+        }
+        return sortConfig.key === name ? sortConfig.direction : undefined;
+    }
 
     var nomor = 1
     return (
@@ -88,10 +127,12 @@ function IsiRak() {
                 <thead className="thead-dark">
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Rak Nama</th>
-                        <th scope="col">Barang Masuk</th>
-                        <th scope="col">Tanggal</th>
+                        <th scope="col" onClick={() => requestSort("stock")} className={getClassNamesFor("stock")}>Stock</th>
+                        <th scope="col" onClick={() => requestSort("rak_id")} className={getClassNamesFor("rak_id")}>Rak Nama</th>
+                        <th scope="col" onClick={() => requestSort("barang_id")} className={getClassNamesFor("barang_id")}>Barang Masuk</th>
+                        {/* <th scope="col">Rak Nama</th> */}
+                        {/* <th scope="col">Barang Masuk</th> */}
+                        <th scope="col" onClick={() => requestSort("updated_at")} className={getClassNamesFor("updated_at")}>Tanggal</th>
                         <th scope="col">opsi</th>
                     </tr>
                 </thead>
@@ -116,30 +157,32 @@ function IsiRak() {
                         // })
 
                         // coba RAK
-                        isiRaks.filter(isiRak => {
+                        // isiRaks.filter(isiRak => {
+                        itmeRaks.filter(isiRak => {
                             // if (!search) return true;
                             // // if (isiRak.rak.nama.toLowerCase().includes(search) || isiRak.barang.produk.toLowerCase().includes(search)) {
                             if (isiRak.rak.nama.toLowerCase().includes(search) || isiRak.barang.produk.toLowerCase().includes(search)) {
                                 return true;
                             }
                             return false;
-                        }).map(isiRak => {
-
-                            return (
-                                <tr key={isiRak.id}>
-                                    <th scope="row">{nomor++}</th>
-                                    <td>{isiRak.stock}</td>
-                                    <td>{isiRak.rak.nama}</td>
-                                    <td>{isiRak.barang.produk}</td>
-                                    <td>{isiRak.updated_at}</td>
-                                    <td>
-                                        <Fragment>
-                                            <Link to={`/isirak/ubah/${isiRak.id}`}><button className="btn btn-success btn-sm">Ubah</button></Link>
-                                            <button className="btn btn-danger ml-1 btn-sm" onClick={() => handleKeluar(isiRak.id)}>barang Keluar</button>
-                                        </Fragment></td>
-                                </tr>
-                            )
                         })
+                            .map(isiRak => {
+
+                                return (
+                                    <tr key={isiRak.id}>
+                                        <th scope="row">{nomor++}</th>
+                                        <td>{isiRak.stock}</td>
+                                        <td value={isiRak.rak_id}>{isiRak.rak.nama}</td>
+                                        <td value={isiRak.barang_id}>{isiRak.barang.produk}</td>
+                                        <td>{isiRak.updated_at}</td>
+                                        <td>
+                                            <Fragment>
+                                                <Link to={`/isirak/ubah/${isiRak.id}`}><button className="btn btn-success btn-sm">Ubah</button></Link>
+                                                <button className="btn btn-danger ml-1 btn-sm" onClick={() => handleKeluar(isiRak.id)}>barang Keluar</button>
+                                            </Fragment></td>
+                                    </tr>
+                                )
+                            })
 
                     }
                 </tbody>
