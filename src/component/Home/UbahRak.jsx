@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import authHeader from '../../services/auth-header';
 
 function UbahRak(props) {
     const [data, setData] = useState({
@@ -14,7 +15,7 @@ function UbahRak(props) {
     }, [])
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/rak/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/rak/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -22,6 +23,10 @@ function UbahRak(props) {
                     stock_max: res.data.stock_max
                 })
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -39,12 +44,22 @@ function UbahRak(props) {
             id: data.id,
             nama: data.nama,
             stock_max: data.stock_max
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             props.history.push('/rak')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
     }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
+    }
+
     return (
         <div className="container-fluid mt-3 api">
             <h4>Ubah Rak</h4>

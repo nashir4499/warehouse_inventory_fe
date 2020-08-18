@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import authHeader from '../../services/auth-header'
 
 function TambahRoleUser(props) {
     const [data, setData] = useState({
@@ -21,12 +22,21 @@ function TambahRoleUser(props) {
         Axios.post('http://127.0.0.1:3333/role', {
             id: data.id,
             nama: data.nama,
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             console.log(res)
             props.history.push('/role')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (

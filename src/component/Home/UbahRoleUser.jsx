@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import authHeader from '../../services/auth-header'
 
 function UbahRoleUser(props) {
     const [data, setData] = useState({
@@ -15,13 +16,17 @@ function UbahRoleUser(props) {
     }, [])
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/role/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/role/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
                     nama: res.data.nama
                 })
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -38,12 +43,22 @@ function UbahRoleUser(props) {
         Axios.post(`http://127.0.0.1:3333/role/${props.match.params.id}`, {
             id: data.id,
             nama: data.nama
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             props.history.push('/role')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
     }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
+    }
+
     return (
         <div className="container-fluid mt-3 api">
             <h4>Ubah Role</h4>

@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import authHeader from '../../services/auth-header';
 
 function TambahBarangKeluar(props) {
     const [data, setData] = useState({
@@ -16,10 +17,14 @@ function TambahBarangKeluar(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -38,15 +43,24 @@ function TambahBarangKeluar(props) {
                 stock_bk: data.stock_bk,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,
-            }).then(res => {
+            }, { headers: authHeader() }
+            ).then(res => {
                 console.log(res)
                 props.history.push('/barangkeluar')
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
         } else {
             alert("Stok Kosong")
         }
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (

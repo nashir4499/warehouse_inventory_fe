@@ -36,6 +36,8 @@ margin-top: 10px;
     margin-left: 15.625rem;
 }
 
+
+/* Orinya disini */
 .card-dashboard{
     border-radius: 10px;
     height: 100%;
@@ -85,5 +87,67 @@ margin-top: 10px;
     padding: 25px;
 }
 
+.card-lain{
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 25px;
+    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+    box-shadow: 3px 3px 3px #aaaaaa;
+    padding: 25px;
+}
+.card-role{
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;   
+    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+    box-shadow: 3px 3px 3px #aaaaaa;
+    padding: 25px;
+}
 
+/* .thead-dark, .thead-dark tr, .thead-dark th{
+    border: none;
+} */
+.thead-dark th{
+    border: none;
+}
+.thawal{
+    border-top-left-radius: 10px;
+}
+.thakhir{
+    border-top-right-radius: 10px;
+}
+
+.rowSearch{
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+    box-shadow: 3px 3px 3px #aaaaaa;
+    padding: 10px;
+}
+
+.search{
+    
+	width: 98%;
+	border-radius: 100px;
+	padding-left: 20px;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-25%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+  
+.kat-kolom {  
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    /* opacity: 0.0; */
+    /* padding: 30px; */
+ }
 

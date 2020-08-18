@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import authHeader from '../../services/auth-header'
 
 function UbahSuplier(props) {
     const [data, setData] = useState({
@@ -17,7 +18,7 @@ function UbahSuplier(props) {
     }, [])
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/suplier/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/suplier/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -26,6 +27,10 @@ function UbahSuplier(props) {
                     deskripsi: res.data.deskripsi
                 })
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -44,12 +49,21 @@ function UbahSuplier(props) {
             alamat: data.alamat,
             phone: data.phone,
             deskripsi: data.deskripsi
-        }).then(res => {
+        }, { headers: authHeader() }).then(res => {
             props.history.push('/suplier')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
     }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
+    }
+
     return (
         <div className="container-fluid mt-3 api">
             <h4>Ubah Suplier</h4>

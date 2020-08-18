@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import authHeader from '../../services/auth-header';
 
 function UbahBarang(props) {
     const [data, setData] = useState({
@@ -20,7 +21,7 @@ function UbahBarang(props) {
     const [supliers, setSupliers] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/barang/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/barang/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -31,18 +32,30 @@ function UbahBarang(props) {
                     kategori_id: res.data.kategori_id
                 })
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/kategori")
+        Axios.get("http://127.0.0.1:3333/kategori", { headers: authHeader() })
             .then((res) => {
                 setKategoris(res.data)
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/suplier")
+        Axios.get("http://127.0.0.1:3333/suplier", { headers: authHeader() })
             .then((res) => {
                 setSupliers(res.data)
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -64,12 +77,21 @@ function UbahBarang(props) {
             deskripsi: data.deskripsi,
             suplier_id: data.suplier_id,
             kategori_id: data.kategori_id
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             console.log(res)
             props.history.push('/barang')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (

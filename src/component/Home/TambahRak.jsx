@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import authHeader from '../../services/auth-header';
 
 function TambahRak(props) {
     const [data, setData] = useState({
@@ -22,12 +23,21 @@ function TambahRak(props) {
             id: data.id,
             nama: data.nama,
             stock_max: data.stock_max,
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             console.log(res)
             props.history.push('/rak')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Axios from 'axios'
+import authHeader from '../../services/auth-header'
 
 function UbahBarangMasuk(props) {
     const [data, setData] = useState({
@@ -15,7 +16,7 @@ function UbahBarangMasuk(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`)
+        Axios.get(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     stock_bm: res.data.stock_bm,
@@ -23,12 +24,20 @@ function UbahBarangMasuk(props) {
                     barang_id: res.data.barang_id
                 })
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/barang")
+        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
@@ -47,15 +56,25 @@ function UbahBarangMasuk(props) {
                 stock_bm: data.stock_bm,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,
-            }).then(res => {
+            }, { headers: authHeader() }
+            ).then(res => {
                 props.history.push('/barangmasuk')
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
         } else {
             alert("Stok Kosong")
         }
     }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
+    }
+
     return (
         <div className="container-fluid mt-3 api">
             <h4>Ubah Barang Masuk</h4>

@@ -21,8 +21,6 @@ import Suplier from './component/Home/Suplier'
 import TambahSuplier from './component/Home/TambahSuplier'
 import UbahSuplier from './component/Home/UbahSuplier'
 import Kategori from './component/Home/Kategori'
-import TambahKategori from './component/Home/TambahKategori'
-import UbahKategori from './component/Home/UbahKategori'
 import RoleUser from './component/Home/RoleUser'
 import UbahRoleUser from './component/Home/UbahRoleUser'
 import TambahRoleUser from './component/Home/TambahRoleUser'
@@ -124,16 +122,6 @@ export default [
         path: '/kategori',
         layout: FullLayout,
         component: Kategori
-    },
-    {
-        path: '/kategori/tambah',
-        layout: FullLayout,
-        component: TambahKategori
-    },
-    {
-        path: '/kategori/ubah/:id',
-        layout: FullLayout,
-        component: UbahKategori
     },
     {
         path: '/isirak',

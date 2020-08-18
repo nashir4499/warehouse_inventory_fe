@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import authHeader from '../../services/auth-header'
 
 function TambahSuplier(props) {
     const [data, setData] = useState({
@@ -25,12 +26,21 @@ function TambahSuplier(props) {
             alamat: data.alamat,
             phone: data.phone,
             deskripsi: data.deskripsi
-        }).then(res => {
+        }, { headers: authHeader() }
+        ).then(res => {
             console.log(res)
             props.history.push('/suplier')
         }).catch(err => {
+            if (err.response.status === 401) {
+                localStorage.removeItem('token')
+                window.location.reload()
+            }
             console.log(err)
         })
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (

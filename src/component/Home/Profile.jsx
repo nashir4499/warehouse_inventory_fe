@@ -5,6 +5,7 @@ import Axios from 'axios'
 import authHeader from '../../services/auth-header'
 import { Helmet } from 'react-helmet'
 import image from './profile.svg'
+import { Redirect } from 'react-router-dom'
 
 function Profile() {
     const [user, setUser] = useState([])
@@ -19,12 +20,20 @@ function Profile() {
                 // console.log(res.data)
                 setUser(res.data);
             }).catch(err => {
+                if (err.response.status === 401) {
+                    localStorage.removeItem('token')
+                    window.location.reload()
+                }
                 console.log(err)
             })
     }
 
     const changePass = () => {
 
+    }
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to="/login" />
     }
 
     return (
