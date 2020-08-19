@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function Suplier() {
     useEffect(() => {
@@ -13,7 +14,7 @@ function Suplier() {
     const [supliers, setSupliers] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/suplier", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/suplier", { headers: authHeader() })
             .then((res) => {
                 setSupliers(res.data)
             }).catch(err => {
@@ -27,7 +28,7 @@ function Suplier() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://127.0.0.1:3333/suplier/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://192.168.100.173:3333/suplier/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {
@@ -48,6 +49,9 @@ function Suplier() {
     var nomor = 1
     return (
         <div className="container mt-4">
+            <Helmet>
+                <title>Suplier</title>
+            </Helmet>
             <div className="row">
                 <div className="col-md-6 card-lain">
                     <h2>Daftar Suplier</h2>

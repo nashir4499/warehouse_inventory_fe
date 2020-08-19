@@ -2,13 +2,15 @@ body{
     background-color: #eef7f7;
 }
 .background{
-    background-image: url(./bg.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
 .cardnya{
-    margin-top: 7%;
     font-family: 'Times New Roman', Times, serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .cardlogin{

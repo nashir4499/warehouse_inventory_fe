@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function UbahSuplier(props) {
     const [data, setData] = useState({
@@ -18,7 +19,7 @@ function UbahSuplier(props) {
     }, [])
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/suplier/${props.match.params.id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/suplier/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -44,7 +45,7 @@ function UbahSuplier(props) {
 
     const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://127.0.0.1:3333/suplier/${props.match.params.id}`, {
+        Axios.post(`http://192.168.100.173:3333/suplier/${props.match.params.id}`, {
             id: data.id,
             alamat: data.alamat,
             phone: data.phone,
@@ -66,6 +67,9 @@ function UbahSuplier(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Ubah Suplier</title>
+            </Helmet>
             <h4>Ubah Suplier</h4>
             <Link to="/suplier" className="btn btn-warning mb-3">Kembali</Link>
             <br />

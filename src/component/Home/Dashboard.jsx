@@ -7,12 +7,6 @@ import authHeader from '../../services/auth-header'
 
 function Dashboard(props) {
 
-    const logout = () => {
-        localStorage.removeItem('token')
-        props.history.push('/login')
-    }
-
-    // const [barangMasuks, setBarangMasuks] = useState([]);
     const [barangs, setBarangs] = useState([]);
     const [raks, setRaks] = useState([]);
     const [stockRak, setStockRak] = useState([]);
@@ -41,7 +35,7 @@ function Dashboard(props) {
 
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/bmasuk/jumlah", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/bmasuk/jumlah", { headers: authHeader() })
             .then((res) => {
                 setBarangMasuk(res.data)
             }).catch(err => {
@@ -51,7 +45,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/suplier/jumlah", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/suplier/jumlah", { headers: authHeader() })
             .then((res) => {
                 setSuplier(res.data)
             }).catch(err => {
@@ -61,7 +55,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/bkeluar/jumlah", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/bkeluar/jumlah", { headers: authHeader() })
             .then((res) => {
                 setBarangKeluar(res.data)
             }).catch(err => {
@@ -71,7 +65,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/rakterpakai/jumlah", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/rakterpakai/jumlah", { headers: authHeader() })
             .then((res) => {
                 setRakTerpakais(res.data)
             }).catch(err => {
@@ -81,7 +75,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/rak/jumlah", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/rak/jumlah", { headers: authHeader() })
             .then((res) => {
                 setStockRak(res.data)
             }).catch(err => {
@@ -91,7 +85,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        // Axios.get("http://127.0.0.1:3333/bmasuk")
+        // Axios.get("http://192.168.100.173:3333/bmasuk")
         //     .then((res) => {
         //         setBarangMasuks(res.data)
         //     }).catch(err => {
@@ -101,7 +95,7 @@ function Dashboard(props) {
         // }
         //         console.log(err)
         //     })
-        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -111,7 +105,7 @@ function Dashboard(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/rak", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/rak", { headers: authHeader() })
             .then((res) => {
                 setRaks(res.data)
             }).catch(err => {
@@ -127,80 +121,8 @@ function Dashboard(props) {
     const stockMed = Math.round((stockRak + rakTerpakais) / 2)
 
 
-    // const [pasangRak, setPasangRak] = useState([]);
-    // const [pasangBarang, setPasangBarang] = useState(['']);
-
-    // const handleChangeRak = () => {
-    //     // setPasangRak(e.target.value)
-
-    //     pilihItemRak()
-    // }
-    // const handleChangeBarang = () => {
-    //     // setPasangBarang(e.target.value)
-    //     pilihItemBarang()
-    // }
-
-    // const [data, setData] = useState({
-    //     stok: '',
-    //     // kembali: '',
-    //     buku_id: '',
-    //     anggota_id: ''
-    // })
-    // if (pasangBarang > "0" && pasangRak > "0") {
-    //     // Axios.get(`http://127.0.0.1:3333/rak/${pasangRak}`)
-    //     //     .then(res => {
-    //     //         console.log(res.data)
-    //     //         setPilihRak(res.data)
-    //     //     }).catch(err => {
-    // if (err.response.status === 401) {
-    //     localStorage.removeItem('token')
-    //     window.location.reload()
-    // }
-    //     //         console.log(err)
-    //     //     })
-    //     // Axios.get(`http://127.0.0.1:3333/bmasuk/${pasangBarang}`)
-    //     //     .then(res => {
-    //     //         console.log(res.data)
-    //     //         setPilihBM(res.data)
-    //     //     }).catch(err => {
-    // if (err.response.status === 401) {
-    //     localStorage.removeItem('token')
-    //     window.location.reload()
-    // }
-    //     //         console.log(err)
-    //     //     })
-
-    //     return
-    // }
-
-
-    // const pilihItem = () => {
-    //     Axios.get(`http://127.0.0.1:3333/rak/${pasangRak}`, { headers: authHeader() })
-    //         .then(res => {
-    //             console.log(res.data)
-    //             setPilihRak(res.data)
-    //         }).catch(err => {
-    //             if (err.response.status === 401) {
-    //                 localStorage.removeItem('token')
-    //                 window.location.reload()
-    //             }
-    //             console.log(err)
-    //         })
-    //     Axios.get(`http://127.0.0.1:3333/barang/${pasangBarang}`, { headers: authHeader() })
-    //         .then(res => {
-    //             console.log(res.data)
-    //             setPilihBarang(res.data)
-    //         }).catch(err => {
-    //             if (err.response.status === 401) {
-    //                 localStorage.removeItem('token')
-    //                 window.location.reload()
-    //             }
-    //             console.log(err)
-    //         })
-    // }
-
     const pilihItemRak = (rak_id) => {
-        Axios.get(`http://127.0.0.1:3333/rak/${rak_id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/rak/${rak_id}`, { headers: authHeader() })
             .then(res => {
                 // console.log(res.data)
                 const selectedRack = res.data
@@ -220,7 +142,7 @@ function Dashboard(props) {
     }
 
     const pilihItemBarang = (barang_id) => {
-        Axios.get(`http://127.0.0.1:3333/barang/${barang_id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/barang/${barang_id}`, { headers: authHeader() })
             .then(res => {
                 // console.log(res.data)
                 const selectedItem = res.data
@@ -254,7 +176,7 @@ function Dashboard(props) {
             if (currantStockRak < 0) {
                 const stockfix = Math.abs(currantStockRak)
                 console.log((stockfix))
-                Axios.post(`http://127.0.0.1:3333/rak/${pilihRak.id}`, {
+                Axios.post(`http://192.168.100.173:3333/rak/${pilihRak.id}`, {
                     id: pilihRak.id,
                     nama: pilihRak.nama,
                     stock_max: 0
@@ -269,7 +191,7 @@ function Dashboard(props) {
                         }
                         console.log(err)
                     })
-                Axios.post(`http://127.0.0.1:3333/barang/${pilihBarang.id}`, {
+                Axios.post(`http://192.168.100.173:3333/barang/${pilihBarang.id}`, {
                     id: pilihBarang.id,
                     produk: pilihBarang.produk,
                     suplier_id: pilihBarang.suplier_id,
@@ -288,7 +210,7 @@ function Dashboard(props) {
                         console.log(err)
                     })
 
-                Axios.post('http://127.0.0.1:3333/rakterpakai', {
+                Axios.post('http://192.168.100.173:3333/rakterpakai', {
                     stock: pilihBarang.stock - stockfix,
                     rak_id: pilihRak.id,
                     barang_id: pilihBarang.id,
@@ -304,7 +226,7 @@ function Dashboard(props) {
                         }
                         console.log(err)
                     })
-                Axios.post('http://127.0.0.1:3333/bmasuk', {
+                Axios.post('http://192.168.100.173:3333/bmasuk', {
                     stock_bm: pilihBarang.stock - stockfix,
                     deskripsi: "Ditambahkan",
                     barang_id: pilihBarang.id,
@@ -323,7 +245,7 @@ function Dashboard(props) {
                     })
 
             } else {
-                Axios.post(`http://127.0.0.1:3333/rak/${pilihRak.id}`, {
+                Axios.post(`http://192.168.100.173:3333/rak/${pilihRak.id}`, {
                     id: pilihRak.id,
                     nama: pilihRak.nama,
                     stock_max: pilihRak.stock_max - pilihBarang.stock
@@ -338,7 +260,7 @@ function Dashboard(props) {
                         }
                         console.log(err)
                     })
-                Axios.post(`http://127.0.0.1:3333/barang/${pilihBarang.id}`, {
+                Axios.post(`http://192.168.100.173:3333/barang/${pilihBarang.id}`, {
                     id: pilihBarang.id,
                     produk: pilihBarang.produk,
                     suplier_id: pilihBarang.suplier_id,
@@ -357,7 +279,7 @@ function Dashboard(props) {
                         console.log(err)
                     })
 
-                Axios.post('http://127.0.0.1:3333/rakterpakai', {
+                Axios.post('http://192.168.100.173:3333/rakterpakai', {
                     stock: pilihBarang.stock,
                     rak_id: pilihRak.id,
                     barang_id: pilihBarang.id,
@@ -373,7 +295,7 @@ function Dashboard(props) {
                         }
                         console.log(err)
                     })
-                Axios.post('http://127.0.0.1:3333/bmasuk', {
+                Axios.post('http://192.168.100.173:3333/bmasuk', {
                     stock_bm: pilihBarang.stock,
                     deskripsi: "Ditambahkan",
                     barang_id: pilihBarang.id,
@@ -405,9 +327,6 @@ function Dashboard(props) {
             <Helmet>
                 <title>Dashboard</title>
             </Helmet>
-            <div className="row mb-2">
-                <button onClick={logout}>Logout</button>
-            </div>
 
             {/* baris pertama */}
             <div className="row">

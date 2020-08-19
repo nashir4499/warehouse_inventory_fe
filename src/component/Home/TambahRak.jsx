@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import authHeader from '../../services/auth-header';
+import { Helmet } from 'react-helmet';
 
 function TambahRak(props) {
     const [data, setData] = useState({
@@ -19,7 +20,7 @@ function TambahRak(props) {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://127.0.0.1:3333/rak', {
+        Axios.post('http://192.168.100.173:3333/rak', {
             id: data.id,
             nama: data.nama,
             stock_max: data.stock_max,
@@ -42,6 +43,9 @@ function TambahRak(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Tambah Rak</title>
+            </Helmet>
             <h4>Tambah Rak</h4>
             <Link to="/rak" className="btn btn-warning mb-3">Kembali</Link>
             <br />

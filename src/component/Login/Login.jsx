@@ -45,7 +45,7 @@ function Login(props) {
                 // setLoading(false)
             })
         // setLoading(true)
-        // Axios.post('http://127.0.0.1:3333/api/api/login', {
+        // Axios.post('http://192.168.100.173:3333/api/api/login', {
         //     email: data.email,
         //     password: data.password
         // }).then(res => {
@@ -75,11 +75,11 @@ function Login(props) {
     }
 
     return (
-        <div className="container">
+        <div className="container cardnya">
             <Helmet> {/* yang nge errorin */}
                 <title>Login</title>
             </Helmet>
-            <div className="row cardnya">
+            <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <div className="card cardlogin">
                         <div className="card-body">

@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function RoleUser(props) {
     useEffect(() => {
         currentUser()
-        checkUser()
+        // checkUser()
         checkItem()
         getUser()
         getToken()
@@ -17,10 +18,15 @@ function RoleUser(props) {
     const [user, setUser] = useState([])
 
     const currentUser = () => {
-        Axios.get("http://127.0.0.1:3333/api/api/profile", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/api/api/profile", { headers: authHeader() })
             .then(res => {
                 // console.log(res.data)
                 setUser(res.data);
+                // console.log(res.data.role_user_id)
+                if (res.data.role_user_id !== 1) {
+                    // return <Redirect to="/dashboard" />
+                    return props.history.push('/dashboard')
+                }
             }).catch(err => {
                 if (err.response.status === 401) {
                     localStorage.removeItem('token')
@@ -28,13 +34,6 @@ function RoleUser(props) {
                 }
                 console.log(err)
             })
-    }
-
-    const checkUser = () => {
-        if (user.role_user_id !== 1) {
-            // return <Redirect to="/dashboard" />
-            return props.history.push('/dashboard')
-        }
     }
 
     const [roles, setRoles] = useState([])
@@ -49,7 +48,7 @@ function RoleUser(props) {
     })
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/role", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/role", { headers: authHeader() })
             .then((res) => {
                 setRoles(res.data)
             }).catch(err => {
@@ -62,7 +61,7 @@ function RoleUser(props) {
     }
 
     const getUser = () => {
-        Axios.get("http://127.0.0.1:3333/api/api/alluser", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/api/api/alluser", { headers: authHeader() })
             .then((res) => {
                 setUsers(res.data)
             }).catch(err => {
@@ -74,7 +73,7 @@ function RoleUser(props) {
             })
     }
     const getToken = () => {
-        Axios.get("http://127.0.0.1:3333/api/api/token", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/api/api/token", { headers: authHeader() })
             .then((res) => {
                 setTokens(res.data)
             }).catch(err => {
@@ -96,7 +95,7 @@ function RoleUser(props) {
     const signup = (e) => {
         e.preventDefault()
         if (data.confirm_password === data.password) {
-            Axios.post('http://127.0.0.1:3333/api/api/signup', {
+            Axios.post('http://192.168.100.173:3333/api/api/signup', {
                 username: data.username,
                 email: data.email,
                 password: data.password,
@@ -119,7 +118,7 @@ function RoleUser(props) {
 
     const logoutSemua = (id) => {
         if (window.confirm("Logout Semua Token?")) {
-            Axios.post('http://127.0.0.1:3333/api/api/logoutAll', { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.post('http://192.168.100.173:3333/api/api/logoutAll', { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     localStorage.removeItem('token')
                     props.history.push('/login')
@@ -135,7 +134,7 @@ function RoleUser(props) {
 
     const deleteSemua = (id) => {
         if (window.confirm("Anda Yakin Ingin Menghapus Semua Data Token?")) {
-            Axios.delete('http://127.0.0.1:3333/api/api/deleteAllToken', { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.delete('http://192.168.100.173:3333/api/api/deleteAllToken', { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     localStorage.removeItem('token')
                     props.history.push('/login')
@@ -158,6 +157,9 @@ function RoleUser(props) {
     var noToken = 1
     return (
         <div className="container mt-4">
+            <Helmet>
+                <title>Role</title>
+            </Helmet>
             {/* Baris ke 1 */}
             <div className="row ">
                 <div className="col-md-4 ">

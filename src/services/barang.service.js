@@ -1,6 +1,6 @@
 const { default: Axios } = require("axios");
 
-const API_URL = "http://127.0.0.1:3333/bmasuk";
+const API_URL = "http://192.168.100.173:3333/bmasuk";
 
 const barang = () => {
     return Axios.get(API_URL)

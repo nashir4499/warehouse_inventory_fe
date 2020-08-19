@@ -2,8 +2,9 @@ import React, { Fragment } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function Kategori() {
     useEffect(() => {
@@ -16,7 +17,7 @@ function Kategori() {
     const [kategoris, setKategoris] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/kategori", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/kategori", { headers: authHeader() })
             .then((res) => {
                 setKategoris(res.data)
             }).catch(err => {
@@ -30,7 +31,7 @@ function Kategori() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://127.0.0.1:3333/kategori/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://192.168.100.173:3333/kategori/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {
@@ -59,7 +60,7 @@ function Kategori() {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://127.0.0.1:3333/kategori', {
+        Axios.post('http://192.168.100.173:3333/kategori', {
             id: data.id,
             nama: data.nama,
         }, { headers: authHeader() }
@@ -95,7 +96,7 @@ function Kategori() {
     }
 
     const checkItemUbah = (id) => {
-        Axios.get(`http://127.0.0.1:3333/kategori/${id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/kategori/${id}`, { headers: authHeader() })
             .then(res => {
                 setDataUbah({
                     id: res.data.id,
@@ -113,7 +114,7 @@ function Kategori() {
 
     const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://127.0.0.1:3333/kategori/${dataUbah.id}`, {
+        Axios.post(`http://192.168.100.173:3333/kategori/${dataUbah.id}`, {
             id: dataUbah.id,
             nama: dataUbah.nama
         }, { headers: authHeader() }
@@ -137,10 +138,12 @@ function Kategori() {
 
     return (
         <div className="container mt-4">
+            <Helmet>
+                <title>Kategori</title>
+            </Helmet>
             <div className="row">
                 <div className="col-md-6 card-lain">
                     <h2>Daftar Kategori</h2>
-                    {/* <Link className="btn btn-primary mb-4" to="/kategori/tambah">Tambah Kategori Baru</Link> */}
                     <button className="btn btn-primary mb-4" onClick={tambahKolom ? () => setTambahKolom(false) : () => setTambahKolom(true)}>Tambah Kategori Baru</button>
                 </div>
                 {

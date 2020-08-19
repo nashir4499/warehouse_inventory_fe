@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function TambahSuplier(props) {
     const [data, setData] = useState({
@@ -21,7 +22,7 @@ function TambahSuplier(props) {
 
     const savePinjam = (e) => {
         e.preventDefault()
-        Axios.post('http://127.0.0.1:3333/suplier', {
+        Axios.post('http://192.168.100.173:3333/suplier', {
             id: data.id,
             alamat: data.alamat,
             phone: data.phone,
@@ -45,6 +46,9 @@ function TambahSuplier(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Tambah Suplier</title>
+            </Helmet>
             <h4>Tambah Suplier</h4>
             <Link to="/suplier" className="btn btn-warning mb-3">Kembali</Link>
             <br />

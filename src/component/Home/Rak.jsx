@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function Rak() {
     useEffect(() => {
@@ -11,7 +12,7 @@ function Rak() {
     const [raks, setRaks] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/rak", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/rak", { headers: authHeader() })
             .then((res) => {
                 setRaks(res.data)
             }).catch(err => {
@@ -25,7 +26,7 @@ function Rak() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://127.0.0.1:3333/rak/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://192.168.100.173:3333/rak/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {
@@ -46,6 +47,9 @@ function Rak() {
     var nomor = 1
     return (
         <div className="container mt-4">
+            <Helmet>
+                <title>Rak</title>
+            </Helmet>
             <div className="row">
                 <div className="col-md-6 card-lain">
                     <h2>Daftar Rak</h2>
@@ -60,7 +64,7 @@ function Rak() {
                             <th scope="col" className="thawal">No</th>
                             <th scope="col">ID</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Stock_MAX</th>
+                            <th scope="col">Stock</th>
                             <th scope="col" className="thakhir">Opsi</th>
                         </tr>
                     </thead>

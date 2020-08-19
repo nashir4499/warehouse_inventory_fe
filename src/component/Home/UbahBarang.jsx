@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import authHeader from '../../services/auth-header';
+import { Helmet } from 'react-helmet';
 
 function UbahBarang(props) {
     const [data, setData] = useState({
@@ -21,7 +22,7 @@ function UbahBarang(props) {
     const [supliers, setSupliers] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/barang/${props.match.params.id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/barang/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     id: res.data.id,
@@ -38,7 +39,7 @@ function UbahBarang(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/kategori", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/kategori", { headers: authHeader() })
             .then((res) => {
                 setKategoris(res.data)
             }).catch(err => {
@@ -48,7 +49,7 @@ function UbahBarang(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/suplier", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/suplier", { headers: authHeader() })
             .then((res) => {
                 setSupliers(res.data)
             }).catch(err => {
@@ -70,7 +71,7 @@ function UbahBarang(props) {
     const savePerubahan = (e) => {
         e.preventDefault()
 
-        Axios.post(`http://127.0.0.1:3333/barang/${props.match.params.id}`, {
+        Axios.post(`http://192.168.100.173:3333/barang/${props.match.params.id}`, {
             id: data.id,
             produk: data.produk,
             stock: data.stock,
@@ -96,6 +97,9 @@ function UbahBarang(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Ubah Barang</title>
+            </Helmet>
             <h4>Ubah Barang </h4>
             <Link to="/barang" className="btn btn-warning mb-3">Kembali</Link>
             <br />

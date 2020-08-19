@@ -16,7 +16,7 @@ function UbahBarangMasuk(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     stock_bm: res.data.stock_bm,
@@ -30,7 +30,7 @@ function UbahBarangMasuk(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -52,7 +52,7 @@ function UbahBarangMasuk(props) {
     const savePerubahan = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
-            Axios.post(`http://127.0.0.1:3333/bmasuk/${props.match.params.id}`, {
+            Axios.post(`http://192.168.100.173:3333/bmasuk/${props.match.params.id}`, {
                 stock_bm: data.stock_bm,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,

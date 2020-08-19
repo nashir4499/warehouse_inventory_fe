@@ -14,8 +14,20 @@ function Profile() {
         currentUser()
     }, [])
 
+    const [data, setData] = useState({
+        password: '',
+        newPassword: '',
+        confirm_password: '',
+    })
+
+    const handleChange = (nama, value) => {
+        setData({
+            ...data,
+            [nama]: value
+        })
+    }
     const currentUser = () => {
-        Axios.get("http://127.0.0.1:3333/api/api/profile", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/api/api/profile", { headers: authHeader() })
             .then(res => {
                 // console.log(res.data)
                 setUser(res.data);
@@ -28,8 +40,34 @@ function Profile() {
             })
     }
 
-    const changePass = () => {
+    const changePass = (e) => {
+        e.preventDefault()
+        if (data.password !== data.newPassword) {
 
+            if (data.newPassword === data.confirm_password) {
+                Axios.put('http://192.168.100.173:3333/api/api/changepass', {
+                    password: data.password,
+                    newPassword: data.newPassword
+                }, { headers: authHeader() }
+                ).then(res => {
+                    console.log(res)
+                    localStorage.removeItem('token')
+                    return <Redirect to="/login" />
+                }).catch(err => {
+                    if (err.response.status === 401) {
+                        localStorage.removeItem('token')
+                        window.location.reload()
+                    } else if (err.response.status === 400) {
+                        alert("Password Sekarang Salah")
+                    }
+                    console.log(err)
+                })
+            } else (
+                alert("Password Baru dan Confirm Password tidak sama")
+            )
+        } else {
+            alert("Paswword Sekarang dan Password Baru Tidak Boleh Sama")
+        }
     }
 
     if (!localStorage.getItem('token')) {
@@ -77,15 +115,15 @@ function Profile() {
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label htmlFor="passlama">Password lama</label>
-                                    <input type="password" className="form-control" id="passlama" name="passlama" />
+                                    <input type="password" className="form-control" placeholder="Password Sekarang" value={data.password} onChange={(e) => handleChange('password', e.target.value)} />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="passbaru">Password baru</label>
-                                    <input type="password" className="form-control" id="passbaru" name="passbaru" />
+                                    <label>Password</label>
+                                    <input type="password" className="form-control" placeholder="Password Baru" value={data.newPassword} onChange={(e) => handleChange('newPassword', e.target.value)} required />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="passbaru2">Repeat password</label>
-                                    <input type="password" className="form-control" id="passbaru2" name="passbaru2" />
+                                    <label>Confrim Password</label>
+                                    <input type="password" className="form-control" placeholder="confirm_password" value={data.confirm_password} onChange={(e) => handleChange('confirm_password', e.target.value)} required />
                                 </div>
                             </div>
                             <div className="modal-footer">

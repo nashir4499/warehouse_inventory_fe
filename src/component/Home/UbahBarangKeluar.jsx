@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import authHeader from '../../services/auth-header';
+import { Helmet } from 'react-helmet';
 
 function UbahBarangKeluar(props) {
     const [data, setData] = useState({
@@ -18,7 +19,7 @@ function UbahBarangKeluar(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get(`http://127.0.0.1:3333/bkeluar/${props.match.params.id}`, { headers: authHeader() })
+        Axios.get(`http://192.168.100.173:3333/bkeluar/${props.match.params.id}`, { headers: authHeader() })
             .then(res => {
                 setData({
                     stock_bk: res.data.stock_bk,
@@ -32,7 +33,7 @@ function UbahBarangKeluar(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -53,7 +54,7 @@ function UbahBarangKeluar(props) {
 
     const savePerubahan = (e) => {
         e.preventDefault()
-        Axios.post(`http://127.0.0.1:3333/bkeluar/${props.match.params.id}`, {
+        Axios.post(`http://192.168.100.173:3333/bkeluar/${props.match.params.id}`, {
             stock_bk: data.stock_bk,
             deskripsi: data.deskripsi,
             barang_id: data.barang_id,
@@ -75,6 +76,9 @@ function UbahBarangKeluar(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Ubah Barang Keluar</title>
+            </Helmet>
             <h4>Ubah Barang Keluar</h4>
             <Link to="/barangkeluar" className="btn btn-warning mb-3">Kembali</Link>
             <br />

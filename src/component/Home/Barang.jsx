@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function Barang() {
     useEffect(() => {
@@ -13,7 +14,7 @@ function Barang() {
     const [barangs, setBarangs] = useState([])
 
     const checkItem = () => {
-        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+        Axios.get("http://192.168.100.173:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -27,7 +28,7 @@ function Barang() {
 
     const handleDelete = (id) => {
         if (window.confirm("Hapus Item?")) {
-            Axios.delete(`http://127.0.0.1:3333/barang/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+            Axios.delete(`http://192.168.100.173:3333/barang/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
                 .then(res => {
                     window.location.reload();
                 }).catch(err => {
@@ -46,6 +47,9 @@ function Barang() {
     var nomor = 1
     return (
         <div className="container mt-4">
+            <Helmet>
+                <title>Barang</title>
+            </Helmet>
             <div className="row">
                 <div className="col-md-6 card-lain">
                     <h2>Data Barang</h2>
