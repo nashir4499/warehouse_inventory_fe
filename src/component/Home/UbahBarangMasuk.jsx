@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import Axios from 'axios'
 import authHeader from '../../services/auth-header'
+import { Helmet } from 'react-helmet'
 
 function UbahBarangMasuk(props) {
     const [data, setData] = useState({
@@ -77,6 +78,9 @@ function UbahBarangMasuk(props) {
 
     return (
         <div className="container-fluid mt-3 api">
+            <Helmet>
+                <title>Ubah Barang Masuk</title>
+            </Helmet>
             <h4>Ubah Barang Masuk</h4>
             <Link to="/barangmasuk" className="btn btn-warning mb-3">Kembali</Link>
             <br />
