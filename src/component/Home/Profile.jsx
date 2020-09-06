@@ -27,7 +27,7 @@ function Profile() {
         })
     }
     const currentUser = () => {
-        Axios.get("http://192.168.100.173:3333/api/api/profile", { headers: authHeader() })
+        Axios.get("http://127.0.0.1:3333/api/api/profile", { headers: authHeader() })
             .then(res => {
                 // console.log(res.data)
                 setUser(res.data);
@@ -45,7 +45,7 @@ function Profile() {
         if (data.password !== data.newPassword) {
 
             if (data.newPassword === data.confirm_password) {
-                Axios.put('http://192.168.100.173:3333/api/api/changepass', {
+                Axios.put('http://127.0.0.1:3333/api/api/changepass', {
                     password: data.password,
                     newPassword: data.newPassword
                 }, { headers: authHeader() }

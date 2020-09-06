@@ -22,7 +22,7 @@ function TambahBarang(props) {
     const [supliers, setSupliers] = useState([]);
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/kategori", { headers: authHeader() })
+        Axios.get("http://127.0.0.1:3333/kategori", { headers: authHeader() })
             .then((res) => {
                 setKategoris(res.data)
             }).catch(err => {
@@ -32,7 +32,7 @@ function TambahBarang(props) {
                 }
                 console.log(err)
             })
-        Axios.get("http://192.168.100.173:3333/suplier", { headers: authHeader() })
+        Axios.get("http://127.0.0.1:3333/suplier", { headers: authHeader() })
             .then((res) => {
                 setSupliers(res.data)
             }).catch(err => {
@@ -54,7 +54,7 @@ function TambahBarang(props) {
     const simpanData = (e) => {
         e.preventDefault()
 
-        Axios.post('http://192.168.100.173:3333/barang', {
+        Axios.post('http://127.0.0.1:3333/barang', {
             id: data.id,
             produk: data.produk,
             stock: data.stock,

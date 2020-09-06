@@ -17,7 +17,7 @@ function TambahBarangMasuk(props) {
     const [barangs, setBarangs] = useState([]);
 
     const checkItem = () => {
-        Axios.get("http://192.168.100.173:3333/barang", { headers: authHeader() })
+        Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
             .then((res) => {
                 setBarangs(res.data)
             }).catch(err => {
@@ -39,7 +39,7 @@ function TambahBarangMasuk(props) {
     const simpanData = (e) => {
         e.preventDefault()
         if (data.barang_id !== "0") {
-            Axios.post('http://192.168.100.173:3333/bmasuk', {
+            Axios.post('http://127.0.0.1:3333/bmasuk', {
                 stock_bm: data.stock_bm,
                 deskripsi: data.deskripsi,
                 barang_id: data.barang_id,

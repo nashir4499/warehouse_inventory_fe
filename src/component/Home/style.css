@@ -7,199 +7,206 @@
     max-width: 12.625rem;
 } */
 .align-items-center {
-    -webkit-box-align: center!important;
-    align-items: center!important;
+  -webkit-box-align: center !important;
+  align-items: center !important;
 }
 .d-flex {
-    display: -webkit-box!important;
-    display: flex!important;
+  display: -webkit-box !important;
+  display: flex !important;
 }
-.nav-line{
-    border: none;
-    /* border-radius: 50px; */
-    margin-left: -15px;
+.nav-line {
+  border: none;
+  /* border-radius: 50px; */
+  margin-left: -15px;
 }
-.nav-line:focus{
-    outline: none;
-}
-
-.icon-warehouse{
-margin-top: 10px;
+.nav-line:focus {
+  outline: none;
 }
 
-.scollbar{
-    overflow: auto;
-    color: white;
+.icon-warehouse {
+  margin-top: 10px;
 }
 
+.scollbar {
+  overflow: auto;
+  color: white;
+}
 
 .content {
-    margin-left: 10.625rem;
+  /* margin-left: 10.625rem; */
+  margin-left: var(--nav-width);
+  transition: 0.5s;
+  /* di ubah 02 09 2020 */
+  /* margin-left: 90px; */
 }
-
+.content-lebar {
+  /* margin-left: 10.625rem; */
+  margin-left: calc(var(--nav-width) + 7rem);
+  transition: 0.5s;
+  /* di ubah 02 09 2020 */
+  /* margin-left: 90px; */
+}
 
 /* Orinya disini */
-.card-dashboard{
-    border-radius: 10px;
-    height: 100%;
-    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
-    box-shadow: 3px 3px 3px #aaaaaa;
+.card-dashboard {
+  border-radius: 10px;
+  height: 100%;
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
 }
 
-.body-laporan{
-    color: white;
-    background-color: teal;
-    border-radius: 10px;
+.body-laporan {
+  color: white;
+  background-color: teal;
+  border-radius: 10px;
 }
 
-.body-laporan h2{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+.body-laporan h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.mInfo{
-    /* position: absolute; */
-    background-color: rgba(170, 170, 170, 0.1);
-    border-radius: 10px;
-    margin-bottom: -5%;
-    padding: 10px;
+.mInfo {
+  /* position: absolute; */
+  background-color: rgba(170, 170, 170, 0.1);
+  border-radius: 10px;
+  margin-bottom: -5%;
+  padding: 10px;
 }
 
 .isi {
-	margin-top: 60px;
+  margin-top: 60px;
 
-	padding: 20px;
+  padding: 20px;
 }
 
 .profil-user img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .col-profil {
-	width: 100%;
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    height: 100%;
-    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
-    box-shadow: 3px 3px 3px #aaaaaa;
-    padding: 25px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 25px;
 }
 
-.card-lain{
-    background-color: white;
-    border-radius: 10px;
-    height: 100%;
-    margin-bottom: 25px;
-    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
-    box-shadow: 3px 3px 3px #aaaaaa;
-    padding: 25px;
+.card-lain {
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  margin-bottom: 25px;
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 25px;
 }
-.card-role{
-    background-color: white;
-    border-radius: 10px;
-    height: 100%;   
-    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
-    box-shadow: 3px 3px 3px #aaaaaa;
-    padding: 25px;
+.card-role {
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 25px;
 }
 
 /* .thead-dark, .thead-dark tr, .thead-dark th{
     border: none;
 } */
-.thead-dark th{
-    border: none;
+.thead-dark th {
+  border: none;
 }
-.thawal{
-    border-top-left-radius: 10px;
+.thawal {
+  border-top-left-radius: 10px;
 }
-.thakhir{
-    border-top-right-radius: 10px;
-}
-
-.rowSearch{
-    background-color: rgb(240, 240, 240);
-    border-radius: 10px;
-    /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
-    box-shadow: 3px 3px 3px #aaaaaa;
-    padding: 10px;
+.thakhir {
+  border-top-right-radius: 10px;
 }
 
-.search{
-    
-	width: 98%;
-	border-radius: 100px;
-	padding-left: 20px;
+.rowSearch {
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 10px;
+}
+
+.search {
+  width: 98%;
+  border-radius: 100px;
+  padding-left: 20px;
 }
 
 @keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-25%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-}
-  
-.kat-kolom {  
-    /* This section calls the slideInFromLeft animation we defined above */
-    animation: 1s ease-out 0s 1 slideInFromLeft;
-    /* opacity: 0.0; */
-    /* padding: 30px; */
+  0% {
+    transform: translateX(-25%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.logout{
-    border: 2px solid;
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-    border-radius: 25px;
-    padding: 10px;
-    box-shadow: 3px 3px 3px #aaaaaa;
-    transition-duration: 0.5s;
-    
+.kat-kolom {
+  /* This section calls the slideInFromLeft animation we defined above */
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+  /* opacity: 0.0; */
+  /* padding: 30px; */
+}
+
+.logout {
+  border: 2px solid;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 3px 3px 3px #aaaaaa;
+  transition-duration: 0.5s;
 }
 .logout:focus {
-    outline: none;
+  outline: none;
 }
 
-.logout:hover{
-    opacity: 0.5;
-    box-shadow: 8px 8px 8px #aaaaaa;
+.logout:hover {
+  opacity: 0.5;
+  box-shadow: 8px 8px 8px #aaaaaa;
 }
-
 
 /* Tambahan Buatan Fajar */
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 /*===== VARIABLES CSS =====*/
-:root{
-    --nav-width: 85px;
+:root {
+  --nav-width: 85px;
 
   /*===== Colores =====*/
-  --first-color: #0C5DF4;
-  --bg-color: #12192C;
+  --first-color: #0c5df4;
+  --bg-color: #12192c;
   --sub-color: #292b30;
-  --white-color: #FFF;
-  
+  --white-color: #fff;
+
   /*===== Fuente y tipografia =====*/
-  --body-font: 'Poppins', sans-serif;
+  --body-font: "Poppins", sans-serif;
   --normal-font-size: 1rem;
-  --small-font-size: .875rem;
-  
+  --small-font-size: 0.875rem;
+
   /*===== z index =====*/
   --z-fixed: 100;
 }
 
-
 /*===== BASE =====*/
-*,::before,::after{
-    box-sizing: border-box;
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
 /* body{
     position: relative;
@@ -209,14 +216,14 @@ margin-top: 10px;
     font-size: var(--normal-font-size);
     transition: .5s;
 } */
-.nav ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /*===== l NAV =====*/
-.l-navbar{
+.l-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -226,37 +233,36 @@ margin-top: 10px;
   background-color: var(--bg-color);
   color: var(--white-color);
   padding: 1.5rem 1rem 2rem;
-  transition: .5s;
+  transition: 0.5s;
   /* z-index: var(--z-fixed); */
 }
 
 /*===== NAV =====*/
-.nav{
+.nav {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  
 }
-.nav__brand{
+.nav__brand {
   display: grid;
   grid-template-columns: max-content max-content;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
 }
-.nav__toggle{
+.nav__toggle {
   font-size: 1.25rem;
-  padding: .75rem;
+  padding: 0.75rem;
   cursor: pointer;
 }
-.nav-toggle{
+.nav-toggle {
   font-size: 1.25rem;
-  padding: .75rem;
+  padding: 0.75rem;
   cursor: pointer;
 }
-.nav__logo{
+.nav__logo {
   color: var(--white-color);
   font-weight: 600;
 }
@@ -265,93 +271,97 @@ margin-top: 10px;
   padding-left: 1rem;
 } */
 
-.nav__link{
+.nav__link {
   display: grid;
   grid-template-columns: max-content max-content;
   align-items: center;
   column-gap: 1.75rem;
-  padding: .75rem;
+  padding: 0.75rem;
   color: var(--white-color);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin-bottom: 1rem;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
 }
-.nav__link:hover{
+.nav__link:hover {
   background-color: var(--white-color);
 }
-.nav__icon{
+.nav__icon {
   font-size: 1.25rem;
 }
-.nav__name{
+.nav__name {
   font-size: var(--small-font-size);
 }
 
 /*Expander menu*/
-.expander{
-    /* position: fixed;
+.expander {
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   background-color: var(--bg-color);
   color: var(--white-color);
   padding: 1.5rem 1rem 2rem;
-  transition: .5s; */
+  transition: 0.5s;
   width: var(--nav-width);
   z-index: var(--z-fixed);
 }
 
 /*Add padding body*/
-.body-pd{
+.body-pd {
   padding: 0rem 0 0 16rem;
 }
 
 /*Active links menu*/
-.active{
+.active {
   background-color: var(--first-color);
 }
 
 /*===== COLLAPSE =====*/
-.collapse{
+.collapse {
   grid-template-columns: 20px max-content 1fr;
 }
-.collapse__link{
+.collapse__link {
   justify-self: flex-end;
-  transition: .5s;
+  transition: 0.5s;
 }
-.collapse__menu{
+.collapse__menu {
   /* display: none; */
-  padding: .75rem 2.25rem;
+  padding: 0.75rem 2.25rem;
 }
-.collapse__sublink{
-  color: var(--white-color) ;
+.collapse__sublink {
+  color: var(--white-color);
   font-size: var(--small-font-size);
 }
-.collapse__sublink:hover{
+.collapse__sublink:hover {
   color: var(--white-color);
 }
 
 /*Show collapse*/
-.showCollapse{
+.showCollapse {
   display: block;
 }
 
 /*Rotate icon*/
-.rotate{
+.rotate {
   transform: rotate(180deg);
 }
 
-.nama-collapse, .logout-sidebar{
+.nama-collapse,
+.logout-sidebar {
   color: white;
 }
-.nama-collapse:hover, .logout-sidebar:hover{
+.nama-collapse:hover,
+.logout-sidebar:hover {
   color: blue;
 }
 
 /* Laporan */
-.laporan{
+.laporan {
   background-size: cover;
-  height: 85vh;
+  min-height: 85vh;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #aaaaaa;

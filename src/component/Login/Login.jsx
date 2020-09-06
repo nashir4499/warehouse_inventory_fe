@@ -45,7 +45,7 @@ function Login(props) {
                 // setLoading(false)
             })
         // setLoading(true)
-        // Axios.post('http://192.168.100.173:3333/api/api/login', {
+        // Axios.post('http://127.0.0.1:3333/api/api/login', {
         //     email: data.email,
         //     password: data.password
         // }).then(res => {
