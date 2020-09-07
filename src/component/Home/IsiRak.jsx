@@ -5,6 +5,7 @@ import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
 import ModalKeluar from "./ModalKeluar";
 import { Modal } from "@material-ui/core";
+import { url } from "../../services/config";
 
 function IsiRak() {
   useEffect(() => {
@@ -16,7 +17,7 @@ function IsiRak() {
   const [idRak, setIdRak] = useState("");
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/rakterpakai", { headers: authHeader() })
+    Axios.get(`${url}/rakterpakai`, { headers: authHeader() })
       .then((res) => {
         setIsiRaks(res.data);
       })
@@ -38,77 +39,6 @@ function IsiRak() {
   const handleModalClose = () => {
     setOpen(false);
   };
-
-  //barang keluar
-  //   const handleKeluar = (id) => {
-  //     Axios.get(`http://127.0.0.1:3333/rakterpakai/${id}`, {
-  //       headers: authHeader(),
-  //     })
-  //       .then((res) => {
-  //         console.log(res.data.rak.nama);
-  //         if (window.confirm(`Keluarkan ${res.data.barang.produk}?`)) {
-  //           // console.log(res.data.rak.stock_max + res.data.stock)
-  //           Axios.post(
-  //             "http://127.0.0.1:3333/bkeluar",
-  //             {
-  //               stock_bk: res.data.stock,
-  //               deskripsi: "Barang Keluar",
-  //               barang_id: res.data.barang_id,
-  //             },
-  //             { headers: authHeader() }
-  //           )
-  //             .then((response) => {
-  //               console.log(response);
-  //             })
-  //             .catch((err) => {
-  //               if (err.response.status === 401) {
-  //                 localStorage.removeItem("token");
-  //                 window.location.reload();
-  //               }
-  //               console.log(err);
-  //             });
-  //           Axios.post(
-  //             `http://127.0.0.1:3333/rak/${res.data.rak_id}`,
-  //             {
-  //               id: res.data.rak.id,
-  //               nama: res.data.rak.nama,
-  //               stock_max: res.data.rak.stock_max + res.data.stock,
-  //             },
-  //             { headers: authHeader() }
-  //           )
-  //             .then((response) => {
-  //               console.log(response.data);
-  //             })
-  //             .catch((err) => {
-  //               if (err.response.status === 401) {
-  //                 localStorage.removeItem("token");
-  //                 window.location.reload();
-  //               }
-  //               console.log(err);
-  //             });
-  //           Axios.delete(`http://127.0.0.1:3333/rakterpakai/${id}`, {
-  //             headers: authHeader(),
-  //           }) //pake bactrik kalo mau ngirim parameter
-  //             .then((response) => {
-  //               window.location.reload();
-  //             })
-  //             .catch((err) => {
-  //               if (err.response.status === 401) {
-  //                 localStorage.removeItem("token");
-  //                 window.location.reload();
-  //               }
-  //               console.log(err);
-  //             });
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         if (err.response.status === 401) {
-  //           localStorage.removeItem("token");
-  //           window.location.reload();
-  //         }
-  //         console.log(err);
-  //       });
-  //   };
 
   //search
   const [search, setInput] = useState("");

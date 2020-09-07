@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Axios from "axios";
 import authHeader from "../../services/auth-header";
 import { useEffect } from "react";
+import { url } from "../../services/config";
 
 // function rand() {
 //   return Math.round(Math.random() * 20) - 10;
@@ -55,7 +56,7 @@ export default function ModalKeluar(props) {
   });
 
   const getIsirak = () => {
-    Axios.get(`http://127.0.0.1:3333/rakterpakai/${props.idRak}`, {
+    Axios.get(`${url}/rakterpakai/${props.idRak}`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -83,7 +84,7 @@ export default function ModalKeluar(props) {
     if (window.confirm(`Keluarkan ${isiRak.barang.produk}?`)) {
       // console.log(isiRak.rak.stock_max + isiRak.stock)
       Axios.post(
-        "http://127.0.0.1:3333/bkeluar",
+        `${url}/bkeluar`,
         {
           stock_bk: isiRak.stock,
           deskripsi: "Barang Keluar",
@@ -102,7 +103,7 @@ export default function ModalKeluar(props) {
           console.log(err);
         });
       Axios.post(
-        `http://127.0.0.1:3333/rak/${isiRak.rak_id}`,
+        `${url}/rak/${isiRak.rak_id}`,
         {
           id: isiRak.rak.id,
           nama: isiRak.rak.nama,
@@ -120,7 +121,7 @@ export default function ModalKeluar(props) {
           }
           console.log(err);
         });
-      Axios.delete(`http://127.0.0.1:3333/rakterpakai/${isiRak.id}`, {
+      Axios.delete(`${url}/rakterpakai/${isiRak.id}`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((response) => {
@@ -141,7 +142,7 @@ export default function ModalKeluar(props) {
     if (window.confirm(`Keluarkan ${jumlah} buah ${isiRak.barang.produk}?`)) {
       // console.log(res.data.rak.stock_max + res.data.stock)
       Axios.post(
-        "http://127.0.0.1:3333/bkeluar",
+        `${url}/bkeluar`,
         {
           stock_bk: jumlah,
           deskripsi: "Barang Keluar",
@@ -160,7 +161,7 @@ export default function ModalKeluar(props) {
           console.log(err);
         });
       Axios.post(
-        `http://127.0.0.1:3333/rak/${isiRak.rak_id}`,
+        `${url}/rak/${isiRak.rak_id}`,
         {
           id: isiRak.rak.id,
           nama: isiRak.rak.nama,
@@ -179,7 +180,7 @@ export default function ModalKeluar(props) {
           console.log(err);
         });
       Axios.post(
-        `http://127.0.0.1:3333/rakterpakai/${isiRak.id}`,
+        `${url}/rakterpakai/${isiRak.id}`,
         {
           id: isiRak.id,
           stock: isiRak.stock - jumlah,

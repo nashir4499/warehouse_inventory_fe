@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
 import Barcode from "react-barcode";
+import { url } from "../../services/config";
 
 function Rak() {
   useEffect(() => {
@@ -13,7 +14,7 @@ function Rak() {
   const [raks, setRaks] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/rak", { headers: authHeader() })
+    Axios.get(`${url}/rak`, { headers: authHeader() })
       .then((res) => {
         setRaks(res.data);
       })
@@ -28,7 +29,7 @@ function Rak() {
 
   const handleDelete = (id) => {
     if (window.confirm("Hapus Item?")) {
-      Axios.delete(`http://127.0.0.1:3333/rak/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
+      Axios.delete(`${url}/rak/${id}`, { headers: authHeader() }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {
           window.location.reload();
         })

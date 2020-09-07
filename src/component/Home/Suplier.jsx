@@ -5,6 +5,7 @@ import Axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
+import { url } from "../../services/config";
 
 function Suplier() {
   useEffect(() => {
@@ -14,7 +15,7 @@ function Suplier() {
   const [supliers, setSupliers] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/suplier", { headers: authHeader() })
+    Axios.get(`${url}/suplier`, { headers: authHeader() })
       .then((res) => {
         setSupliers(res.data);
       })
@@ -29,7 +30,7 @@ function Suplier() {
 
   const handleDelete = (id) => {
     if (window.confirm("Hapus Item?")) {
-      Axios.delete(`http://127.0.0.1:3333/suplier/${id}`, {
+      Axios.delete(`${url}/suplier/${id}`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {

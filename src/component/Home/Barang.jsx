@@ -6,6 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
 import Barcode from "react-barcode";
+import { url } from "../../services/config";
 
 function Barang() {
   useEffect(() => {
@@ -15,7 +16,7 @@ function Barang() {
   const [barangs, setBarangs] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+    Axios.get(`${url}/barang`, { headers: authHeader() })
       .then((res) => {
         setBarangs(res.data);
       })
@@ -30,7 +31,7 @@ function Barang() {
 
   const handleDelete = (id) => {
     if (window.confirm("Hapus Item?")) {
-      Axios.delete(`http://127.0.0.1:3333/barang/${id}`, {
+      Axios.delete(`${url}/barang/${id}`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {

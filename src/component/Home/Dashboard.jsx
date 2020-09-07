@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import authHeader from "../../services/auth-header";
+import { url } from "../../services/config";
 
 function Dashboard(props) {
   const [barangs, setBarangs] = useState([]);
@@ -31,7 +32,7 @@ function Dashboard(props) {
   }, []);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/bmasuk/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/bmasuk/jumlah`, { headers: authHeader() })
       .then((res) => {
         setBarangMasuk(res.data);
       })
@@ -42,7 +43,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/suplier/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/suplier/jumlah`, { headers: authHeader() })
       .then((res) => {
         setSuplier(res.data);
       })
@@ -53,7 +54,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/bkeluar/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/bkeluar/jumlah`, { headers: authHeader() })
       .then((res) => {
         setBarangKeluar(res.data);
       })
@@ -64,7 +65,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/rakterpakai/jumlah", {
+    Axios.get(`${url}/rakterpakai/jumlah`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -77,7 +78,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/rak/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/rak/jumlah`, { headers: authHeader() })
       .then((res) => {
         setStockRak(res.data);
       })
@@ -88,7 +89,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    // Axios.get("http://127.0.0.1:3333/bmasuk")
+    // Axios.get(`${url}/bmasuk`)
     //     .then((res) => {
     //         setBarangMasuks(res.data)
     //     }).catch(err => {
@@ -98,7 +99,7 @@ function Dashboard(props) {
     // }
     //         console.log(err)
     //     })
-    Axios.get("http://127.0.0.1:3333/barang", { headers: authHeader() })
+    Axios.get(`${url}/barang`, { headers: authHeader() })
       .then((res) => {
         setBarangs(res.data);
       })
@@ -109,7 +110,7 @@ function Dashboard(props) {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/rak", { headers: authHeader() })
+    Axios.get(`${url}/rak`, { headers: authHeader() })
       .then((res) => {
         setRaks(res.data);
       })
@@ -126,7 +127,7 @@ function Dashboard(props) {
   const stockMed = Math.round((stockRak + rakTerpakais) / 2);
 
   const pilihItemRak = (rak_id) => {
-    Axios.get(`http://127.0.0.1:3333/rak/${rak_id}`, { headers: authHeader() })
+    Axios.get(`${url}/rak/${rak_id}`, { headers: authHeader() })
       .then((res) => {
         // console.log(res.data)
         const selectedRack = res.data;
@@ -147,7 +148,7 @@ function Dashboard(props) {
   };
 
   const pilihItemBarang = (barang_id) => {
-    Axios.get(`http://127.0.0.1:3333/barang/${barang_id}`, {
+    Axios.get(`${url}/barang/${barang_id}`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -182,7 +183,7 @@ function Dashboard(props) {
         const stockfix = Math.abs(currantStockRak);
         // console.log(stockfix);
         Axios.post(
-          `http://127.0.0.1:3333/rak/${pilihRak.id}`,
+          `${url}/rak/${pilihRak.id}`,
           {
             id: pilihRak.id,
             nama: pilihRak.nama,
@@ -202,7 +203,7 @@ function Dashboard(props) {
             console.log(err);
           });
         Axios.post(
-          `http://127.0.0.1:3333/barang/${pilihBarang.id}`,
+          `${url}/barang/${pilihBarang.id}`,
           {
             id: pilihBarang.id,
             produk: pilihBarang.produk,
@@ -226,7 +227,7 @@ function Dashboard(props) {
           });
 
         Axios.post(
-          "http://127.0.0.1:3333/rakterpakai",
+          `${url}/rakterpakai`,
           {
             stock: pilihBarang.stock - stockfix,
             rak_id: pilihRak.id,
@@ -246,7 +247,7 @@ function Dashboard(props) {
             console.log(err);
           });
         Axios.post(
-          "http://127.0.0.1:3333/bmasuk",
+          `${url}/bmasuk`,
           {
             stock_bm: pilihBarang.stock - stockfix,
             deskripsi: "Ditambahkan",
@@ -268,7 +269,7 @@ function Dashboard(props) {
           });
       } else {
         Axios.post(
-          `http://127.0.0.1:3333/rak/${pilihRak.id}`,
+          `${url}/rak/${pilihRak.id}`,
           {
             id: pilihRak.id,
             nama: pilihRak.nama,
@@ -288,7 +289,7 @@ function Dashboard(props) {
             console.log(err);
           });
         Axios.post(
-          `http://127.0.0.1:3333/barang/${pilihBarang.id}`,
+          `${url}/barang/${pilihBarang.id}`,
           {
             id: pilihBarang.id,
             produk: pilihBarang.produk,
@@ -312,7 +313,7 @@ function Dashboard(props) {
           });
 
         Axios.post(
-          "http://127.0.0.1:3333/rakterpakai",
+          `${url}/rakterpakai`,
           {
             stock: pilihBarang.stock,
             rak_id: pilihRak.id,
@@ -332,7 +333,7 @@ function Dashboard(props) {
             console.log(err);
           });
         Axios.post(
-          "http://127.0.0.1:3333/bmasuk",
+          `${url}/bmasuk`,
           {
             stock_bm: pilihBarang.stock,
             deskripsi: "Ditambahkan",

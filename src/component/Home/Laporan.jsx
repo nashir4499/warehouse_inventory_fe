@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import Axios from "axios";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
+import { url } from "../../services/config";
 
 function Laporan() {
   useEffect(() => {
@@ -16,7 +17,7 @@ function Laporan() {
   const [barangOneForAll, setBarangOneForAll] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/bmasuk", { headers: authHeader() })
+    Axios.get(`${url}/bmasuk`, { headers: authHeader() })
       .then((res) => {
         setBMasuks(res.data);
       })
@@ -27,7 +28,7 @@ function Laporan() {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/bkeluar", { headers: authHeader() })
+    Axios.get(`${url}/bkeluar`, { headers: authHeader() })
       .then((res) => {
         setBKeluars(res.data);
       })
@@ -38,7 +39,7 @@ function Laporan() {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/bmasuk/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/bmasuk/jumlah`, { headers: authHeader() })
       .then((res) => {
         setBarangMasuk(res.data);
       })
@@ -49,7 +50,7 @@ function Laporan() {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/bkeluar/jumlah", { headers: authHeader() })
+    Axios.get(`${url}/bkeluar/jumlah`, { headers: authHeader() })
       .then((res) => {
         setBarangKeluar(res.data);
       })
@@ -60,7 +61,7 @@ function Laporan() {
         }
         console.log(err);
       });
-    Axios.get("http://127.0.0.1:3333/bmasuk/oneForAll", {
+    Axios.get(`${url}/bmasuk/oneForAll`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -82,7 +83,7 @@ function Laporan() {
   const StokSatuan = (props) => {
     const [jumlahBM, setJumlahBM] = useState();
     const [jumlahBK, setJumlahBK] = useState();
-    Axios.get(`http://127.0.0.1:3333/bmasuk/jumlah/${props.id}`, {
+    Axios.get(`${url}/bmasuk/jumlah/${props.id}`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -95,7 +96,7 @@ function Laporan() {
         }
         console.log(err);
       });
-    Axios.get(`http://127.0.0.1:3333/bkeluar/jumlah/${props.id}`, {
+    Axios.get(`${url}/bkeluar/jumlah/${props.id}`, {
       headers: authHeader(),
     })
       .then((res) => {

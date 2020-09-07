@@ -5,6 +5,7 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
+import { url } from "../../services/config";
 
 function RoleUser(props) {
   useEffect(() => {
@@ -18,7 +19,7 @@ function RoleUser(props) {
   const [user, setUser] = useState([]);
 
   const currentUser = () => {
-    Axios.get("http://127.0.0.1:3333/api/api/profile", {
+    Axios.get(`${url}/api/api/profile`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -51,7 +52,7 @@ function RoleUser(props) {
   });
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/role", { headers: authHeader() })
+    Axios.get(`${url}/role`, { headers: authHeader() })
       .then((res) => {
         setRoles(res.data);
       })
@@ -65,7 +66,7 @@ function RoleUser(props) {
   };
 
   const getUser = () => {
-    Axios.get("http://127.0.0.1:3333/api/api/alluser", {
+    Axios.get(`${url}/api/api/alluser`, {
       headers: authHeader(),
     })
       .then((res) => {
@@ -80,7 +81,7 @@ function RoleUser(props) {
       });
   };
   const getToken = () => {
-    Axios.get("http://127.0.0.1:3333/api/api/token", { headers: authHeader() })
+    Axios.get(`${url}/api/api/token`, { headers: authHeader() })
       .then((res) => {
         setTokens(res.data);
       })
@@ -104,7 +105,7 @@ function RoleUser(props) {
     e.preventDefault();
     if (data.confirm_password === data.password) {
       Axios.post(
-        "http://127.0.0.1:3333/api/api/signup",
+        `${url}/api/api/signup`,
         {
           username: data.username,
           email: data.email,
@@ -129,7 +130,7 @@ function RoleUser(props) {
 
   const logoutSemua = (id) => {
     if (window.confirm("Logout Semua Token?")) {
-      Axios.post("http://127.0.0.1:3333/api/api/logoutAll", {
+      Axios.post(`${url}/api/api/logoutAll`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {
@@ -148,7 +149,7 @@ function RoleUser(props) {
 
   const deleteSemua = (id) => {
     if (window.confirm("Anda Yakin Ingin Menghapus Semua Data Token?")) {
-      Axios.delete("http://127.0.0.1:3333/api/api/deleteAllToken", {
+      Axios.delete(`${url}/api/api/deleteAllToken`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {

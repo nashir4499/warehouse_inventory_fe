@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
+import { url } from "../../services/config";
 
 function BarangMasuk() {
   useEffect(() => {
@@ -12,7 +13,7 @@ function BarangMasuk() {
   const [bMasuks, setBMasuks] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/bmasuk", { headers: authHeader() })
+    Axios.get(`${url}/bmasuk`, { headers: authHeader() })
       .then((res) => {
         setBMasuks(res.data);
       })
@@ -27,7 +28,7 @@ function BarangMasuk() {
 
   const handleDelete = (id) => {
     if (window.confirm("Hapus Item?")) {
-      Axios.delete(`http://127.0.0.1:3333/bmasuk/${id}`, {
+      Axios.delete(`${url}/bmasuk/${id}`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {

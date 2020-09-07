@@ -5,6 +5,7 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import authHeader from "../../services/auth-header";
 import { Helmet } from "react-helmet";
+import { url } from "../../services/config";
 
 function Kategori() {
   useEffect(() => {
@@ -17,7 +18,7 @@ function Kategori() {
   const [kategoris, setKategoris] = useState([]);
 
   const checkItem = () => {
-    Axios.get("http://127.0.0.1:3333/kategori", { headers: authHeader() })
+    Axios.get(`${url}/kategori`, { headers: authHeader() })
       .then((res) => {
         setKategoris(res.data);
       })
@@ -32,7 +33,7 @@ function Kategori() {
 
   const handleDelete = (id) => {
     if (window.confirm("Hapus Item?")) {
-      Axios.delete(`http://127.0.0.1:3333/kategori/${id}`, {
+      Axios.delete(`${url}/kategori/${id}`, {
         headers: authHeader(),
       }) //pake bactrik kalo mau ngirim parameter
         .then((res) => {
@@ -64,7 +65,7 @@ function Kategori() {
   const savePinjam = (e) => {
     e.preventDefault();
     Axios.post(
-      "http://127.0.0.1:3333/kategori",
+      `${url}/kategori`,
       {
         id: data.id,
         nama: data.nama,
@@ -104,7 +105,7 @@ function Kategori() {
   };
 
   const checkItemUbah = (id) => {
-    Axios.get(`http://127.0.0.1:3333/kategori/${id}`, { headers: authHeader() })
+    Axios.get(`${url}/kategori/${id}`, { headers: authHeader() })
       .then((res) => {
         setDataUbah({
           id: res.data.id,
@@ -123,7 +124,7 @@ function Kategori() {
   const savePerubahan = (e) => {
     e.preventDefault();
     Axios.post(
-      `http://127.0.0.1:3333/kategori/${dataUbah.id}`,
+      `${url}/kategori/${dataUbah.id}`,
       {
         id: dataUbah.id,
         nama: dataUbah.nama,
