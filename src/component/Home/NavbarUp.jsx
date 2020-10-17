@@ -54,7 +54,7 @@ function NavbarUp() {
           <h5 className="text-sans-serif">warehouse</h5>
         </div>
       </Link>
-      <ul className="align-items-center d-none d-lg-block navbar-nav mt-2">
+      {/* <ul className="align-items-center d-none d-lg-block navbar-nav mt-2">
         <li className="nav-item">
           <h6>
             Hallo <img src={image} alt="" /> {user.username}{" "}
@@ -71,9 +71,51 @@ function NavbarUp() {
         <li className="dropdown nav-item">
           <h6>Role: {user.role_user_id === 1 ? "Admin" : "User"}</h6>
         </li>
-      </ul>
+      </ul> */}
+     
+      <div className="dropdown navbar-nav-icons ml-auto flex-row align-items-center navbar-nav">
+        <button className="dropdown-toggle btnNavUp" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span className="account-user-avatar"> 
+            <img src={image} alt="" />
+            {/* <img src="assets/images/users/avatar-1.jpg" alt="user-image" className="rounded-circle"/> */}
+          </span>
+          <span>
+            <span className="account-user-name"><b>Hallo {user.username}</b></span>
+          </span>
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {/* <!-- item--> */}
+            <div className=" dropdown-header noti-title">
+              <h6 className="text-overflow m-0 mb-1 nav_name"><ion-icon name="mail-outline"></ion-icon> {user.email} </h6>
+            </div>
 
-      <ul className="navbar-nav-icons ml-auto flex-row align-items-center navbar-nav">
+            {/* <!-- item--> */}
+            {user.role_user_id === 1 ?
+              <Link to="/role" className="dropdown-item">
+                <ion-icon name="people-outline" className="nav__icon"></ion-icon>
+                <span className="nav__name"> Admin</span>
+              </Link>
+              :
+              <h6 className="dropdown-item">
+                <ion-icon name="people-outline" className="nav__icon"></ion-icon>
+                <span className="nav__name"> User</span>
+              </h6>
+            }
+
+            {/* <!-- item--> */}
+            <Link to="/profile" className="dropdown-item">
+              <ion-icon name="person-outline" className="nav__icon"></ion-icon>
+              <span className="nav__name"> Profile</span>
+            </Link>
+            {/* <!-- item--> */}
+            <Link to="/login" onClick={logout} className="dropdown-item">
+              <ion-icon name="log-out-outline" className="nav__icon"></ion-icon>
+              <span className="nav__name"> Logout</span>
+            </Link>
+          </div>
+        </div>
+
+      {/* <ul className="navbar-nav-icons ml-auto flex-row align-items-center navbar-nav">
         <li className="dropdown nav-item">
           <div className="row">
             <button className="logout" onClick={logout}>
@@ -81,7 +123,7 @@ function NavbarUp() {
             </button>
           </div>
         </li>
-      </ul>
+      </ul> */}
     </nav>
   );
 }

@@ -400,3 +400,28 @@
   /* border: 4px solid #f25634; */
   /* box-sizing: border-box; */
 }
+
+.btnNavUp {
+  background: none;
+  border: transparent;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+.btnNavUp:focus {
+  outline: none;
+}
+.btnNavUp:hover {
+  background-color: #dddddd;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+.dropdown .dropdown-menu {
+  transition: all 0.5s;
+  overflow: hidden;
+  transform-origin: top center;
+  transform: scale(1, 0);
+  display: block;
+}
+.dropdown:hover .dropdown-menu {
+  transform: scale(1);
+}
