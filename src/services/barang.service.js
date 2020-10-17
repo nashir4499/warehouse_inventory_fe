@@ -12,7 +12,7 @@ const storeBarang = (
   produk,
   suplier_id,
   kategori_id,
-  stock,
+  stok,
   deskripsi
 ) => {
   return Axios.post(API_URL);
@@ -22,7 +22,7 @@ const updateBarang = (
   produk,
   suplier_id,
   kategori_id,
-  stock,
+  stok,
   deskripsi
 ) => {
   return Axios.post(API_URL);

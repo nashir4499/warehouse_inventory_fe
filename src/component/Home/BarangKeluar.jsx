@@ -45,6 +45,10 @@ function BarangKeluar() {
         });
     }
   };
+
+  //search
+  const [search, setInput] = useState("");
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -56,11 +60,22 @@ function BarangKeluar() {
         <title>Barang Keluar</title>
       </Helmet>
       <div className="row">
-        <div className="col-md-6 card-lain">
+        <div className="col-md-5 card-lain">
           <h2>Barang Keluar</h2>
-          <Link className="btn btn-primary mb-4" to="/barangkeluar/tambah">
+          <Link className="btn btn-primary" to="/barangkeluar/tambah">
             Tambah Barang Keluar
           </Link>
+        </div>
+        <div className="col-md-5 offset-md-2 rowSearchLain">
+          <div className="rowSearchIsiLain">
+            <input
+              className="form-control search"
+              type="text"
+              value={search}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Cari barang"
+            />
+          </div>
         </div>
       </div>
       <div className="row card-lain table-responsive">
@@ -81,15 +96,26 @@ function BarangKeluar() {
             </tr>
           </thead>
           <tbody>
-            {bKeluars &&
-              bKeluars.map((bKeluar) => {
+            {bKeluars.filter((bKeluar)=>{
+              if (
+                bKeluar.barang.produk.toLowerCase().includes(search) ||
+                bKeluar.barang.suplier_id.toLowerCase().includes(search) ||
+                bKeluar.deskripsi.toLowerCase().includes(search) ||
+                bKeluar.barang.produk.includes(search) ||
+                bKeluar.barang.suplier_id.includes(search) ||
+                bKeluar.deskripsi.includes(search)
+              ) {
+                return true;
+              }
+              return false;
+            }).map((bKeluar) => {
                 return (
                   <tr key={bKeluar.id}>
                     <th scope="row">{nomor++}</th>
                     <td>{bKeluar.barang.produk}</td>
                     <td>{bKeluar.updated_at}</td>
                     <td>{bKeluar.barang.suplier_id}</td>
-                    <td>{bKeluar.stock_bk}</td>
+                    <td>{bKeluar.stok_bk}</td>
                     <td>{bKeluar.deskripsi}</td>
                     <td>
                       <Fragment>

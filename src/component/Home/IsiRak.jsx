@@ -105,6 +105,8 @@ function IsiRak() {
       </div>
 
       <div className="container card-lain">
+
+        {/* search */}
         <div className="row pb-3">
           <div className="col-md-6 offset-md-3 rowSearch">
             <input
@@ -116,6 +118,7 @@ function IsiRak() {
             />
           </div>
         </div>
+        
         <div className="table-responsive">
           <table className="table">
             <thead className="thead-dark">
@@ -125,10 +128,17 @@ function IsiRak() {
                 </th>
                 <th
                   scope="col"
-                  onClick={() => requestSort("stock")}
-                  className={getClassNamesFor("stock")}
+                  onClick={() => requestSort("stok")}
+                  className={getClassNamesFor("stok")}
                 >
-                  Stock
+                  stok
+                </th>
+                <th
+                  scope="col"
+                  onClick={() => requestSort("volume_terpakai")}
+                  className={getClassNamesFor("volume_terpakai")}
+                >
+                  Volume Terpakai
                 </th>
                 <th
                   scope="col"
@@ -177,7 +187,8 @@ function IsiRak() {
                     return (
                       <tr key={isiRak.id}>
                         <th scope="row">{nomor++}</th>
-                        <td>{isiRak.stock}</td>
+                        <td>{isiRak.stok}</td>
+                        <td>{isiRak.volume_terpakai}cm3</td>
                         <td value={isiRak.rak_id}>{isiRak.rak.nama}</td>
                         <td value={isiRak.barang_id}>{isiRak.barang.produk}</td>
                         <td>{isiRak.updated_at}</td>

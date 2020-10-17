@@ -10,7 +10,7 @@ function TambahSuplier(props) {
   const [data, setData] = useState({
     id: "",
     alamat: "",
-    phone: "",
+    no_tlp: "",
     deskripsi: "",
   });
 
@@ -28,7 +28,7 @@ function TambahSuplier(props) {
       {
         id: data.id,
         alamat: data.alamat,
-        phone: data.phone,
+        no_tlp: data.no_tlp,
         deskripsi: data.deskripsi,
       },
       { headers: authHeader() }
@@ -85,8 +85,8 @@ function TambahSuplier(props) {
           <input
             type="text"
             className="form-control"
-            value={data.phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
+            value={data.no_tlp}
+            onChange={(e) => handleChange("no_tlp", e.target.value)}
           />
         </div>
         <div className="form-group">

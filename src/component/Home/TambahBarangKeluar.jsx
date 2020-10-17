@@ -9,7 +9,7 @@ import { url } from "../../services/config";
 
 function TambahBarangKeluar(props) {
   const [data, setData] = useState({
-    stock_bk: "",
+    stok_bk: "",
     deskripsi: "",
     barang_id: "",
   });
@@ -45,7 +45,7 @@ function TambahBarangKeluar(props) {
       Axios.post(
         `${url}/bkeluar`,
         {
-          stock_bk: data.stock_bk,
+          stok_bk: data.stok_bk,
           deskripsi: data.deskripsi,
           barang_id: data.barang_id,
         },
@@ -84,12 +84,12 @@ function TambahBarangKeluar(props) {
 
       <form onSubmit={simpanData}>
         <div className="form-group">
-          <label>Stock Barang Keluar</label>
+          <label>Stok Barang Keluar</label>
           <input
             type="text"
             className="form-control"
-            value={data.stock_bk}
-            onChange={(e) => handleChange("stock_bk", e.target.value)}
+            value={data.stok_bk}
+            onChange={(e) => handleChange("stok_bk", e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -113,7 +113,7 @@ function TambahBarangKeluar(props) {
               <option defaultValue>Choose...</option>
               {barangs &&
                 barangs.map((barang) => {
-                  // const cek = barang.stock - barang.pinjam.length > 0;
+                  // const cek = barang.stok - barang.pinjam.length > 0;
                   return (
                     <option key={barang.id} value={barang.id}>
                       {barang.produk}

@@ -46,6 +46,9 @@ function Suplier() {
     }
   };
 
+  //search
+  const [search, setInput] = useState("");
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -57,11 +60,22 @@ function Suplier() {
         <title>Suplier</title>
       </Helmet>
       <div className="row">
-        <div className="col-md-6 card-lain">
+        <div className="col-md-5 card-lain">
           <h2>Daftar Suplier</h2>
-          <Link className="btn btn-primary mb-4" to="/suplier/tambah">
+          <Link className="btn btn-primary" to="/suplier/tambah">
             Tambah Suplier Baru
           </Link>
+        </div>
+        <div className="col-md-5 offset-md-2 rowSearchLain">
+          <div className="rowSearchIsiLain">
+            <input
+              className="form-control search"
+              type="text"
+              value={search}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Cari barang"
+            />
+          </div>
         </div>
       </div>
       <div className="row card-lain table-responsive">
@@ -73,7 +87,7 @@ function Suplier() {
               </th>
               <th scope="col">ID</th>
               <th scope="col">Alamat</th>
-              <th scope="col">Phone</th>
+              <th scope="col">Telpon</th>
               <th scope="col">Deskripsi</th>
               <th scope="col" className="thakhir">
                 Opsi
@@ -81,14 +95,25 @@ function Suplier() {
             </tr>
           </thead>
           <tbody>
-            {supliers &&
-              supliers.map((suplier) => {
+            {supliers.filter((suplier)=>{
+              if (
+                suplier.id.toLowerCase().includes(search) ||
+                suplier.alamat.toLowerCase().includes(search) ||
+                suplier.deskripsi.toLowerCase().includes(search) ||
+                suplier.id.includes(search) ||
+                suplier.alamat.includes(search) ||
+                suplier.deskripsi.includes(search)
+              ) {
+                return true;
+              }
+              return false;
+            }).map((suplier) => {
                 return (
                   <tr key={suplier.id}>
                     <th scope="row">{nomor++}</th>
                     <td>{suplier.id}</td>
                     <td>{suplier.alamat}</td>
-                    <td>{suplier.phone}</td>
+                    <td>{suplier.no_tlp}</td>
                     <td>{suplier.deskripsi}</td>
                     <td>
                       <Fragment>

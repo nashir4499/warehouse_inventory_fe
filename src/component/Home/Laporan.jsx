@@ -151,7 +151,7 @@ function Laporan() {
                       <th scope="row">{noBm++}</th>
                       <td>{bMasuk.barang.produk}</td>
                       <td>{bMasuk.updated_at}</td>
-                      <td>{bMasuk.stock_bm}</td>
+                      <td>{bMasuk.stok_bm}</td>
                     </tr>
                   );
                 })}
@@ -184,7 +184,7 @@ function Laporan() {
                       <th scope="row">{noBk++}</th>
                       <td>{bkeluar.barang.produk}</td>
                       <td>{bkeluar.updated_at}</td>
-                      <td>{bkeluar.stock_bk}</td>
+                      <td>{bkeluar.stok_bk}</td>
                     </tr>
                   );
                 })}

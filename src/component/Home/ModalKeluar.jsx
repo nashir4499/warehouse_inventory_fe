@@ -48,7 +48,8 @@ export default function ModalKeluar(props) {
   //   const [isiRak, setIsiRak] = useState({});
   const [isiRak, setIsiRak] = useState({
     id: "",
-    stock: "",
+    stok: "",
+    volume_terpakai: "",
     rak_id: "",
     barang_id: "",
     barang: {},
@@ -62,7 +63,8 @@ export default function ModalKeluar(props) {
       .then((res) => {
         setIsiRak({
           id: res.data.id,
-          stock: res.data.stock,
+          stok: res.data.stok,
+          volume_terpakai: res.data.volume_terpakai,
           rak_id: res.data.rak_id,
           barang_id: res.data.barang_id,
           barang: res.data.barang,
@@ -82,11 +84,11 @@ export default function ModalKeluar(props) {
   //keluarkan semua
   const handleKeluarSemua = () => {
     if (window.confirm(`Keluarkan ${isiRak.barang.produk}?`)) {
-      // console.log(isiRak.rak.stock_max + isiRak.stock)
+      // console.log(isiRak.rak.volume_rak + isiRak.stok)
       Axios.post(
         `${url}/bkeluar`,
         {
-          stock_bk: isiRak.stock,
+          stok_bk: isiRak.stok,
           deskripsi: "Barang Keluar",
           barang_id: isiRak.barang_id,
         },
@@ -107,7 +109,10 @@ export default function ModalKeluar(props) {
         {
           id: isiRak.rak.id,
           nama: isiRak.rak.nama,
-          stock_max: isiRak.rak.stock_max + isiRak.stock,
+          volume_rak: isiRak.rak.volume_rak + isiRak.volume_terpakai,
+          panjang: isiRak.rak.panjang,
+          lebar: isiRak.rak.lebar,
+          tinggi: isiRak.rak.tinggi,
         },
         { headers: authHeader() }
       )
@@ -140,11 +145,13 @@ export default function ModalKeluar(props) {
   const sebagian = (e) => {
     e.preventDefault();
     if (window.confirm(`Keluarkan ${jumlah} buah ${isiRak.barang.produk}?`)) {
-      // console.log(res.data.rak.stock_max + res.data.stock)
+      // console.log(res.data.rak.volume_rak + res.data.stok)
+      // console.log(isiRak.barang.volume_barang);
+      const volumeKeluar = isiRak.barang.volume_barang * jumlah;
       Axios.post(
         `${url}/bkeluar`,
         {
-          stock_bk: jumlah,
+          stok_bk: jumlah,
           deskripsi: "Barang Keluar",
           barang_id: isiRak.barang_id,
         },
@@ -165,7 +172,10 @@ export default function ModalKeluar(props) {
         {
           id: isiRak.rak.id,
           nama: isiRak.rak.nama,
-          stock_max: isiRak.rak.stock_max + parseInt(jumlah),
+          volume_rak: isiRak.rak.volume_rak + volumeKeluar,
+          panjang: isiRak.rak.panjang,
+          lebar: isiRak.rak.lebar,
+          tinggi: isiRak.rak.tinggi,
         },
         { headers: authHeader() }
       )
@@ -183,7 +193,8 @@ export default function ModalKeluar(props) {
         `${url}/rakterpakai/${isiRak.id}`,
         {
           id: isiRak.id,
-          stock: isiRak.stock - jumlah,
+          stok: isiRak.stok - jumlah,
+          volume_terpakai: isiRak.volume_terpakai - volumeKeluar,
           rak_id: isiRak.rak_id,
           barang_id: isiRak.barang_id,
         },
@@ -207,9 +218,9 @@ export default function ModalKeluar(props) {
       <h6 id="simple-modal-title">
         {isiRak.barang.produk} dari rak {isiRak.rak.nama}
       </h6>
-      <p>stok yang ada {isiRak.stock}. Pilih jumlah yang akan dikeluarkan</p>
+      <p>stok yang ada {isiRak.stok}. Pilih jumlah yang akan dikeluarkan</p>
       <div className="row text-center">
-        {isiRak.stock > 1 && (
+        {isiRak.stok > 1 && (
           <div className="col-sm-6">
             <input
               className="form-check-input"
@@ -257,7 +268,7 @@ export default function ModalKeluar(props) {
                   id="myNumber"
                   placeholder="jumlah barang"
                   min="1"
-                  max={isiRak.stock - 1}
+                  max={isiRak.stok - 1}
                   value={jumlah}
                   onChange={(e) => setJumlah(e.target.value)}
                 />

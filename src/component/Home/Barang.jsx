@@ -47,6 +47,9 @@ function Barang() {
     }
   };
 
+  //search
+  const [search, setInput] = useState("");
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -58,14 +61,37 @@ function Barang() {
         <title>Barang</title>
       </Helmet>
       <div className="row">
-        <div className="col-md-6 card-lain">
+        <div className="col-md-5 card-lain">
           <h2>Data Barang</h2>
           <Link className="btn btn-primary" to="/barang/tambah">
             Tambah Barang
           </Link>
         </div>
+        <div className="col-md-5 offset-md-2 rowSearchLain">
+          <div className="rowSearchIsiLain">
+            <input
+              className="form-control search"
+              type="text"
+              value={search}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Cari barang"
+            />
+          </div>
+        </div>
       </div>
+      
       <div className="row card-lain table-responsive">
+        {/* <div className="row pb-3">
+          <div className="col-md-6 offset-md-3 rowSearch">
+            <input
+              className="form-control search"
+              type="text"
+              value={search}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Cari barang"
+            />
+          </div>
+        </div> */}
         <table className="table">
           <thead className="thead-dark">
             <tr>
@@ -77,6 +103,7 @@ function Barang() {
               <th scope="col">Suplier</th>
               <th scope="col">Kategori</th>
               <th scope="col">Stok</th>
+              <th scope="col">Volume</th>
               <th scope="col">Deskripsi</th>
               <th scope="col" className="thakhir">
                 opsi
@@ -84,8 +111,21 @@ function Barang() {
             </tr>
           </thead>
           <tbody>
-            {barangs &&
-              barangs.map((barang) => {
+            {barangs.filter((barang)=>{
+              if (
+                barang.produk.toLowerCase().includes(search) ||
+                barang.suplier.id.toLowerCase().includes(search) ||
+                barang.kategori.nama.toLowerCase().includes(search) ||
+                barang.deskripsi.toLowerCase().includes(search) ||
+                barang.produk.includes(search) ||
+                barang.suplier.id.includes(search) ||
+                barang.kategori.nama.includes(search) ||
+                barang.deskripsi.includes(search)
+              ) {
+                return true;
+              }
+              return false;
+            }).map((barang) => {
                 return (
                   <tr key={barang.id}>
                     <th scope="row">{nomor++}</th>
@@ -100,7 +140,8 @@ function Barang() {
                     <td>{barang.produk}</td>
                     <td>{barang.suplier.id}</td>
                     <td>{barang.kategori.nama}</td>
-                    <td>{barang.stock}</td>
+                    <td>{barang.stok}</td>
+                    <td>{barang.volume_barang}cm3</td>
                     <td>{barang.deskripsi}</td>
                     <td>
                       <Fragment>

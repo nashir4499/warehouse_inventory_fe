@@ -43,6 +43,9 @@ function Rak() {
     }
   };
 
+  //search
+  const [search, setInput] = useState("");
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -54,11 +57,22 @@ function Rak() {
         <title>Rak</title>
       </Helmet>
       <div className="row">
-        <div className="col-md-6 card-lain">
+        <div className="col-md-5 card-lain">
           <h2>Daftar Rak</h2>
-          <Link className="btn btn-primary mb-4" to="/rak/tambah">
+          <Link className="btn btn-primary" to="/rak/tambah">
             Tambah Rak Baru
           </Link>
+        </div>
+        <div className="col-md-5 offset-md-2 rowSearchLain">
+          <div className="rowSearchIsiLain">
+            <input
+              className="form-control search"
+              type="text"
+              value={search}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Cari barang"
+            />
+          </div>
         </div>
       </div>
       <div className="row card-lain table-responsive">
@@ -70,15 +84,25 @@ function Rak() {
               </th>
               <th scope="col">ID</th>
               <th scope="col">Nama</th>
-              <th scope="col">Stock</th>
+              <th scope="col">Volume Rak</th>
+              <th scope="col">Ukuran P/L/T</th>
               <th scope="col" className="thakhir">
                 Opsi
               </th>
             </tr>
           </thead>
           <tbody>
-            {raks &&
-              raks.map((rak) => {
+            {raks.filter((rak)=>{
+              if (
+                rak.id.toLowerCase().includes(search) ||
+                rak.nama.toLowerCase().includes(search) ||
+                rak.id.includes(search) ||
+                rak.nama.includes(search)
+              ) {
+                return true;
+              }
+              return false;
+            }).map((rak) => {
                 return (
                   <tr key={rak.id}>
                     <th scope="row">{nomor++}</th>
@@ -94,7 +118,10 @@ function Rak() {
                       }
                     </td>
                     <td>{rak.nama}</td>
-                    <td>{rak.stock_max}</td>
+                    <td>{rak.volume_rak}cm3</td>
+                    <td>
+                      {rak.panjang}cm / {rak.lebar}cm / {rak.tinggi}cm
+                    </td>
                     <td>
                       <Fragment>
                         <Link to={`/rak/ubah/${rak.id}`}>
@@ -115,6 +142,7 @@ function Rak() {
               })}
           </tbody>
         </table>
+        <p>*Panjang/Lebar/Tinggi</p>
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ function NavbarUp() {
     if (window.confirm("Anda Yakin Ingin Keluar?")) {
       localStorage.removeItem("token");
       // return props.history.push("/login")
+      window.location.reload();
       return <Redirect to="/login" />;
     }
   };

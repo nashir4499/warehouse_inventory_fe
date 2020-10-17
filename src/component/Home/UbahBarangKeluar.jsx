@@ -9,7 +9,7 @@ import { url } from "../../services/config";
 
 function UbahBarangKeluar(props) {
   const [data, setData] = useState({
-    stock_bk: "",
+    stok_bk: "",
     deskripsi: "",
     barang_id: [],
   });
@@ -25,7 +25,7 @@ function UbahBarangKeluar(props) {
     })
       .then((res) => {
         setData({
-          stock_bk: res.data.stock_bk,
+          stok_bk: res.data.stok_bk,
           deskripsi: res.data.deskripsi,
           barang_id: res.data.barang_id,
         });
@@ -62,7 +62,7 @@ function UbahBarangKeluar(props) {
     Axios.post(
       `${url}/bkeluar/${props.match.params.id}`,
       {
-        stock_bk: data.stock_bk,
+        stok_bk: data.stok_bk,
         deskripsi: data.deskripsi,
         barang_id: data.barang_id,
       },
@@ -97,12 +97,12 @@ function UbahBarangKeluar(props) {
 
       <form onSubmit={savePerubahan}>
         <div className="form-group">
-          <label>Stock Barang Keluar</label>
+          <label>stok Barang Keluar</label>
           <input
             type="text"
             className="form-control"
-            value={data.stock_bk}
-            onChange={(e) => handleChange("stock_bk", e.target.value)}
+            value={data.stok_bk}
+            onChange={(e) => handleChange("stok_bk", e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -127,7 +127,7 @@ function UbahBarangKeluar(props) {
               <option defaultValue>Choose...</option>
               {barangs &&
                 barangs.map((barang) => {
-                  // const cek = barang.stock - barang.pinjam.length > 0;
+                  // const cek = barang.stok - barang.pinjam.length > 0;
                   return (
                     <option key={barang.id} value={barang.id}>
                       {barang.produk}

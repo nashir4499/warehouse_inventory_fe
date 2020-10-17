@@ -11,7 +11,7 @@ function UbahSuplier(props) {
   const [data, setData] = useState({
     id: "",
     alamat: "",
-    phone: "",
+    no_tlp: "",
     deskripsi: "",
   });
 
@@ -27,7 +27,7 @@ function UbahSuplier(props) {
         setData({
           id: res.data.id,
           alamat: res.data.alamat,
-          phone: res.data.phone,
+          no_tlp: res.data.no_tlp,
           deskripsi: res.data.deskripsi,
         });
       })
@@ -54,7 +54,7 @@ function UbahSuplier(props) {
       {
         id: data.id,
         alamat: data.alamat,
-        phone: data.phone,
+        no_tlp: data.no_tlp,
         deskripsi: data.deskripsi,
       },
       { headers: authHeader() }
@@ -110,8 +110,8 @@ function UbahSuplier(props) {
           <input
             type="text"
             className="form-control"
-            value={data.phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
+            value={data.no_tlp}
+            onChange={(e) => handleChange("no_tlp", e.target.value)}
           />
         </div>
         <div className="form-group">
