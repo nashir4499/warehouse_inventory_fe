@@ -177,6 +177,7 @@ function Kategori() {
                 value={data.nama}
                 onChange={(e) => handleChange("nama", e.target.value)}
                 placeholder="Nama Kategori"
+                required
               />
               <button className="btn btn-success mt-3" type="submit">
                 Simpan
@@ -247,6 +248,7 @@ function Kategori() {
                 className="form-control"
                 value={dataUbah.nama}
                 onChange={(e) => handleChangeUbah("nama", e.target.value)}
+                required
               />
               <button className="btn btn-success mt-3" type="submit">
                 Simpan

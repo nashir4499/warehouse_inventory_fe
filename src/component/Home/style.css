@@ -10,15 +10,18 @@
   -webkit-box-align: center !important;
   align-items: center !important;
 }
+
 .d-flex {
   display: -webkit-box !important;
   display: flex !important;
 }
+
 .nav-line {
   border: none;
   /* border-radius: 50px; */
   margin-left: -15px;
 }
+
 .nav-line:focus {
   outline: none;
 }
@@ -39,6 +42,7 @@
   /* di ubah 02 09 2020 */
   /* margin-left: 90px; */
 }
+
 .content-lebar {
   /* margin-left: 10.625rem; */
   margin-left: calc(var(--nav-width) + 7rem);
@@ -85,16 +89,12 @@
   padding: 20px;
 }
 
-.profil-user img {
-  width: 100%;
-  height: 100%;
-}
 .col-profil {
   width: 100%;
   height: 100%;
   background-color: white;
   border-radius: 10px;
-  height: 100%;
+  /* height: 100%; */
   /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
   box-shadow: 3px 3px 3px #aaaaaa;
   padding: 25px;
@@ -109,6 +109,7 @@
   box-shadow: 3px 3px 3px #aaaaaa;
   padding: 25px;
 }
+
 .card-role {
   background-color: white;
   border-radius: 10px;
@@ -124,9 +125,11 @@
 .thead-dark th {
   border: none;
 }
+
 .thawal {
   border-top-left-radius: 10px;
 }
+
 .thakhir {
   border-top-right-radius: 10px;
 }
@@ -146,6 +149,7 @@
   /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
   padding: 25px;
 }
+
 .rowSearchIsiLain {
   position: absolute;
   background-color: rgb(240, 240, 240);
@@ -169,6 +173,7 @@
     transform: translateX(-25%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -192,6 +197,7 @@
   box-shadow: 3px 3px 3px #aaaaaa;
   transition-duration: 0.5s;
 }
+
 .logout:focus {
   outline: none;
 }
@@ -230,6 +236,7 @@
 ::after {
   box-sizing: border-box;
 }
+
 /* body{
     position: relative;
     margin: 0;
@@ -267,6 +274,7 @@
   justify-content: space-between;
   overflow: hidden;
 }
+
 .nav__brand {
   display: grid;
   grid-template-columns: max-content max-content;
@@ -274,16 +282,19 @@
   align-items: center;
   margin-bottom: 2rem;
 }
+
 .nav__toggle {
   font-size: 1.25rem;
   padding: 0.75rem;
   cursor: pointer;
 }
+
 .nav-toggle {
   font-size: 1.25rem;
   padding: 0.75rem;
   cursor: pointer;
 }
+
 .nav__logo {
   color: var(--white-color);
   font-weight: 600;
@@ -305,12 +316,15 @@
   transition: 0.3s;
   cursor: pointer;
 }
+
 .nav__link:hover {
   background-color: var(--white-color);
 }
+
 .nav__icon {
   font-size: 1.25rem;
 }
+
 .nav__name {
   font-size: var(--small-font-size);
 }
@@ -343,18 +357,22 @@
 .collapse {
   grid-template-columns: 20px max-content 1fr;
 }
+
 .collapse__link {
   justify-self: flex-end;
   transition: 0.5s;
 }
+
 .collapse__menu {
   /* display: none; */
   padding: 0.75rem 2.25rem;
 }
+
 .collapse__sublink {
   color: var(--white-color);
   font-size: var(--small-font-size);
 }
+
 .collapse__sublink:hover {
   color: var(--white-color);
 }
@@ -373,6 +391,7 @@
 .logout-sidebar {
   color: white;
 }
+
 .nama-collapse:hover,
 .logout-sidebar:hover {
   color: blue;
@@ -407,14 +426,17 @@
   border-radius: 50px;
   transition: 0.5s;
 }
+
 .btnNavUp:focus {
   outline: none;
 }
+
 .btnNavUp:hover {
   background-color: #dddddd;
   border-radius: 50px;
   transition: 0.5s;
 }
+
 .dropdown .dropdown-menu {
   transition: all 0.5s;
   overflow: hidden;
@@ -422,6 +444,76 @@
   transform: scale(1, 0);
   display: block;
 }
+
 .dropdown:hover .dropdown-menu {
   transform: scale(1);
+}
+
+/* foto profile */
+.col-profil-foto {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  background-color: white;
+  border-radius: 10px;
+  /* height: 100%; */
+  /* box-shadow: 3px 1px 0px 0px gray; kiri, bawah, kanan, atas */
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 25px;
+}
+
+.profil-user {
+  position: absolute;
+  overflow: hidden;
+  /* margin-top: 10%; */
+  left: 7%;
+  right: 7%;
+  top: 7%;
+  bottom: 7%;
+}
+
+
+.profil-user img {
+  /* width: 200px; */
+  width: 100%;
+  height: 100%;
+  /* height: 200px; */
+}
+
+.icon-wrapper {
+  opacity: 0;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  transition: 0.5s;
+}
+
+.icon-wrapper .nav__icon {
+  margin-top: 50px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.profil-user .icon-wrapper:hover {
+  opacity: 1;
+  z-index: 2;
+}
+
+.profil-user input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  /* z-index: 5; */
 }

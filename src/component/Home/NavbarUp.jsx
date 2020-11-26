@@ -38,6 +38,29 @@ function NavbarUp() {
       });
   };
 
+  const FotoUserAtas = (props) => {
+    // console.log(props.idnya)
+    const id = props.idnya
+    // const urlImg = `${url}/api/foto/${user.id}`;
+    // const urlImg = `${url}/api/foto/${id}`;
+    const urlImg = Axios.get(`${url}/api/foto/${id}`, {
+      headers: authHeader(),
+      responseType: 'blob'
+    }).then(response => {
+      let imageNode = document.getElementById('fotoatas');
+      let imgUrl = URL.createObjectURL(response.data)
+      imageNode.src = imgUrl
+    })
+
+    return (
+      <img
+        className="gambar-profil rounded-circle"
+        id="fotoatas"
+        alt="Logo" width="40" style={{ maxHeight: "40px" }}
+      />
+    )
+  }
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -72,48 +95,53 @@ function NavbarUp() {
           <h6>Role: {user.role_user_id === 1 ? "Admin" : "User"}</h6>
         </li>
       </ul> */}
-     
+
       <div className="dropdown navbar-nav-icons ml-auto flex-row align-items-center navbar-nav">
         <button className="dropdown-toggle btnNavUp" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span className="account-user-avatar"> 
-            <img src={image} alt="" />
+          <span className="account-user-avatar">
+            {user.foto ?
+              <FotoUserAtas idnya={user.id} />
+              :
+              // <img className="gambar-profil rounded-circle" src={image} alt="Profile" />
+              <img src={image} alt="" style={{ maxHeight: "40px" }} />
+            }
             {/* <img src="assets/images/users/avatar-1.jpg" alt="user-image" className="rounded-circle"/> */}
           </span>
           <span>
-            <span className="account-user-name"><b>Hallo {user.username}</b></span>
+            <span className="account-user-name"><b> Hallo {user.username}</b></span>
           </span>
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {/* <!-- item--> */}
-            <div className=" dropdown-header noti-title">
-              <h6 className="text-overflow m-0 mb-1 nav_name"><ion-icon name="mail-outline"></ion-icon> {user.email} </h6>
-            </div>
-
-            {/* <!-- item--> */}
-            {user.role_user_id === 1 ?
-              <Link to="/role" className="dropdown-item">
-                <ion-icon name="people-outline" className="nav__icon"></ion-icon>
-                <span className="nav__name"> Admin</span>
-              </Link>
-              :
-              <h6 className="dropdown-item">
-                <ion-icon name="people-outline" className="nav__icon"></ion-icon>
-                <span className="nav__name"> User</span>
-              </h6>
-            }
-
-            {/* <!-- item--> */}
-            <Link to="/profile" className="dropdown-item">
-              <ion-icon name="person-outline" className="nav__icon"></ion-icon>
-              <span className="nav__name"> Profile</span>
-            </Link>
-            {/* <!-- item--> */}
-            <Link to="/login" onClick={logout} className="dropdown-item">
-              <ion-icon name="log-out-outline" className="nav__icon"></ion-icon>
-              <span className="nav__name"> Logout</span>
-            </Link>
+          <div className=" dropdown-header noti-title">
+            <h6 className="text-overflow m-0 mb-1 nav_name"><ion-icon name="mail-outline"></ion-icon> {user.email} </h6>
           </div>
+
+          {/* <!-- item--> */}
+          {user.role_user_id === 1 ?
+            <Link to="/role" className="dropdown-item">
+              <ion-icon name="people-outline" className="nav__icon"></ion-icon>
+              <span className="nav__name"> Admin</span>
+            </Link>
+            :
+            <h6 className="dropdown-item">
+              <ion-icon name="people-outline" className="nav__icon"></ion-icon>
+              <span className="nav__name"> User</span>
+            </h6>
+          }
+
+          {/* <!-- item--> */}
+          <Link to="/profile" className="dropdown-item">
+            <ion-icon name="person-outline" className="nav__icon"></ion-icon>
+            <span className="nav__name"> Profile</span>
+          </Link>
+          {/* <!-- item--> */}
+          <Link to="/login" onClick={logout} className="dropdown-item">
+            <ion-icon name="log-out-outline" className="nav__icon"></ion-icon>
+            <span className="nav__name"> Logout</span>
+          </Link>
         </div>
+      </div>
 
       {/* <ul className="navbar-nav-icons ml-auto flex-row align-items-center navbar-nav">
         <li className="dropdown nav-item">

@@ -7,9 +7,11 @@ import { Helmet } from "react-helmet";
 import image from "./profile.svg";
 import { Redirect } from "react-router-dom";
 import { url } from "../../services/config";
+import { Message } from "@material-ui/icons";
 
 function Profile() {
   const [user, setUser] = useState([]);
+  const [foto, setFoto] = useState(false);
 
   useEffect(() => {
     currentUser();
@@ -40,6 +42,23 @@ function Profile() {
         }
         console.log(err);
       });
+    // Axios.get(`${url}/api/foto`, {
+    //   headers: authHeader(),
+    //   responseType: 'arraybuffer'
+    // })
+    //   .then((res) => {
+    //     // console.log(res.data)
+    //     // (Buffer.from(res.data, 'binary').toString('base64'))
+    //     // setFoto(res.data);
+    //     setFoto(Buffer.from(res.data, 'binary').toString('base64'));
+    //   })
+    //   .catch((err) => {
+    //     if (err.response.status === 401) {
+    //       localStorage.removeItem("token");
+    //       window.location.reload();
+    //     }
+    //     console.log(err);
+    //   });
   };
 
   const changePass = (e) => {
@@ -74,6 +93,92 @@ function Profile() {
     }
   };
 
+  const onChangeFoto = (data) => {
+    console.log(data.target.files[0]);
+    if (data.target.files[0].type === "image/jpeg" || data.target.files[0].type === "image/png") {
+      uploadFoto(data)
+    } else {
+      alert("File harus berupa JPEG atau PNG")
+    }
+  }
+
+  const uploadFoto = (data) => {
+    // console.log(data.target.files[0])
+    const user = localStorage.getItem("token");
+    const fotoUp = new FormData();
+    // fotoUp.append('name', foto);
+    fotoUp.append('profile_pic', data.target.files[0]);
+    Axios.post(
+      `${url}/api/upload`,
+      fotoUp,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + user,
+        },
+      }
+    )
+      .then((res) => {
+        // alert("File Upload success");
+        window.location.reload();
+
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          window.location.reload();
+        }
+        console.log(err);
+      });
+  }
+
+  const FotoUser = (props) => {
+    // console.log(props.idnya)
+    const id = props.idnya
+    // const urlImg = `${url}/api/foto/${user.id}`;
+    // const urlImg = `${url}/api/foto/${id}`;
+    const urlImg = Axios.get(`${url}/api/foto/${id}`, {
+      headers: authHeader(),
+      responseType: 'blob'
+    }).then(response => {
+      let imageNode = document.getElementById('fotonya');
+      let imgUrl = URL.createObjectURL(response.data)
+      imageNode.src = imgUrl
+    })
+    // Axios.get(`${urlImg}`)
+    //   // Axios.get(`${url}/api/foto/${props.idnya}`)
+    //   .then((res) => {
+    //     // console.log(res.status)
+    //     setFoto(true)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   });
+    // fetch(urlImg).then(function (response) {
+    //   console.log(response.status); // returns 200
+    //   if (response.status) {
+    //     setFoto(true)
+    //   } else {
+    //     setFoto(false)
+    //   }
+    //   // response.blob().then(function(myBlob) {
+    //   //   var objectURL = URL.createObjectURL(myBlob);
+    //   //   myImage.src = objectURL;
+    //   // });
+    // });
+    return (
+      <img
+        className="gambar-profil rounded-circle"
+        id="fotonya"
+        // src={image}
+        // src={urlImg}
+        // src={foto ? urlImg : image}
+        // src={foto === true ? urlImg : image}
+        alt="Profile"
+      />
+    )
+  }
+
   if (!localStorage.getItem("token")) {
     return <Redirect to="/login" />;
   }
@@ -85,13 +190,20 @@ function Profile() {
       </Helmet>
       <div className="container isi">
         <div className="row">
-          <div className="col-md-3 col-profil text-center">
+          <div className="col-md-3 col-profil-foto text-center">
             <div className="profil-user">
-              <img
-                className="gambar-profil rounded-circle"
-                src={image}
-                alt=""
-              />
+              {user.foto ?
+                <FotoUser idnya={user.id} />
+                :
+                <img
+                  className="gambar-profil rounded-circle" src={image} alt="Profile"
+                />
+              }
+              <div className="icon-wrapper">
+                {/* <i class="fas fa-upload fa-3x" /> */}
+                <ion-icon name="person-outline" className="nav__icon"></ion-icon>
+                <input type="file" name="profile_pic" id="profile_pic" onChange={onChangeFoto} />
+              </div>
             </div>
           </div>
           <div className="col-md-5 col-profil ml-3">

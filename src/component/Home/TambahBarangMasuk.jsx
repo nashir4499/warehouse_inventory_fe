@@ -88,6 +88,7 @@ function TambahBarangMasuk(props) {
             className="form-control"
             value={data.stok_bm}
             onChange={(e) => handleChange("stok_bm", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -97,6 +98,7 @@ function TambahBarangMasuk(props) {
             className="form-control"
             value={data.deskripsi}
             onChange={(e) => handleChange("deskripsi", e.target.value)}
+            required
           />
         </div>
         <fieldset id="group1">
@@ -107,8 +109,9 @@ function TambahBarangMasuk(props) {
               id="barangs"
               name="barangs"
               onChange={(e) => handleChange("barang_id", e.target.value)}
+              required
             >
-              <option defaultValue>Choose...</option>
+              <option value="">Choose...</option>
               {barangs &&
                 barangs.map((barang) => {
                   // const cek = barang.stok - barang.pinjam.length > 0;

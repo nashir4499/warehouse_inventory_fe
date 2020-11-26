@@ -69,6 +69,7 @@ function TambahSuplier(props) {
             className="form-control"
             value={data.id}
             onChange={(e) => handleChange("id", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -78,6 +79,7 @@ function TambahSuplier(props) {
             className="form-control"
             value={data.alamat}
             onChange={(e) => handleChange("alamat", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -87,6 +89,7 @@ function TambahSuplier(props) {
             className="form-control"
             value={data.no_tlp}
             onChange={(e) => handleChange("no_tlp", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -96,6 +99,7 @@ function TambahSuplier(props) {
             className="form-control"
             value={data.deskripsi}
             onChange={(e) => handleChange("deskripsi", e.target.value)}
+            required
           />
         </div>
         <button className="btn btn-success" type="submit">

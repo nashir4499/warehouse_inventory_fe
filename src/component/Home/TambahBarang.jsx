@@ -126,6 +126,7 @@ function TambahBarang(props) {
             className="form-control"
             value={data.id}
             onChange={(e) => handleChange("id", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -135,15 +136,17 @@ function TambahBarang(props) {
             className="form-control"
             value={data.produk}
             onChange={(e) => handleChange("produk", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
           <label>Stok Barang</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             value={data.stok}
             onChange={(e) => handleChange("stok", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -158,6 +161,7 @@ function TambahBarang(props) {
                   min="1"
                   value={ukuran.panjang}
                   onChange={(e) => handleChange("panjang", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
@@ -173,6 +177,7 @@ function TambahBarang(props) {
                   min="1"
                   value={ukuran.lebar}
                   onChange={(e) => handleChange("lebar", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
@@ -188,6 +193,7 @@ function TambahBarang(props) {
                   min="1"
                   value={ukuran.tinggi}
                   onChange={(e) => handleChange("tinggi", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
@@ -218,6 +224,7 @@ function TambahBarang(props) {
             className="form-control"
             value={data.deskripsi}
             onChange={(e) => handleChange("deskripsi", e.target.value)}
+            required
           />
         </div>
         <fieldset id="group1">
@@ -228,8 +235,9 @@ function TambahBarang(props) {
               id="kategoris"
               name="kategoris"
               onChange={(e) => handleChange("kategori_id", e.target.value)}
+              required
             >
-              <option defaultValue>Choose...</option>
+              <option value="">Choose...</option>
               {kategoris &&
                 kategoris.map((kategori) => {
                   // const cek = barang.stok - barang.pinjam.length > 0;
@@ -250,8 +258,9 @@ function TambahBarang(props) {
               id="supliers"
               name="supliers"
               onChange={(e) => handleChange("suplier_id", e.target.value)}
+              required
             >
-              <option defaultValue>Choose...</option>
+              <option value="">Choose...</option>
               {supliers &&
                 supliers.map((suplier) => {
                   // const cek = barang.stok - barang.pinjam.length > 0;

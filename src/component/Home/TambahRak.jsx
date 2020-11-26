@@ -94,6 +94,7 @@ function TambahRak(props) {
             className="form-control"
             value={data.id}
             onChange={(e) => handleChange("id", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -103,6 +104,7 @@ function TambahRak(props) {
             className="form-control"
             value={data.nama}
             onChange={(e) => handleChange("nama", e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -117,6 +119,7 @@ function TambahRak(props) {
                   min="1"
                   value={ukuran.panjang}
                   onChange={(e) => handleChange("panjang", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
@@ -132,6 +135,7 @@ function TambahRak(props) {
                   min="1"
                   value={ukuran.lebar}
                   onChange={(e) => handleChange("lebar", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
@@ -147,6 +151,7 @@ function TambahRak(props) {
                   min="1"
                   value={ukuran.tinggi}
                   onChange={(e) => handleChange("tinggi", e.target.value)}
+                  required
                 />
                 <div className="input-group-append">
                   <span className="input-group-text cm">cm</span>
